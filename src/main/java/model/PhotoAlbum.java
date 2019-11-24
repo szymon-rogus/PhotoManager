@@ -1,43 +1,73 @@
 package model;
 
-import java.time.LocalDate;
+import com.sun.istack.Nullable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+@Entity
+@Table(name = "PHOTO_ALBUM")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PhotoAlbum {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "PHOTO_ID")
+    private Integer id;
+
+    @Column(name = "NAME")
+    @NonNull
     private String name;
+
+    @OneToMany(orphanRemoval = true)
+    @NonNull
     private List<Photo> photoList;
-    private LocalDate creationDate;
-    private LocalDate modificationDate;
-    private Map<String, Integer> tagMap;
+
+    @Column(name = "CREATION_DATE")
+    @CreationTimestamp
+    private Date creationDate;
+
+    @Column(name = "LAST_MODIFIED")
+    @UpdateTimestamp
+    private Date modificationDate;
+
+    @OneToMany
+    @MapKey(name = "name")
+    @Nullable
+    private Map<String, Tag> tagMap;
 
 
-    public PhotoAlbum(String name, List<Photo> photoList) {
+    public PhotoAlbum(@NonNull String name,@NonNull List<Photo> photoList) {
         this.name = name;
         this.photoList = photoList;
     }
 
-    public List<Photo> getAllPhotos(){
-        return photoList;
-    }
-
-    public List<Photo> getByTag(String tag){
+    public List<Photo> getByTag(String tag) {
         // TODO
         return null;
     }
 
-    public List<Photo> getByName(String name){
-       // TODO
-       return null;
-    }
-
-    public List<Photo> getByDateInterval(){
+    public List<Photo> getByName(String name) {
         // TODO
         return null;
     }
 
-    public void AddToAlbum(Photo photo){
+    public List<Photo> getByDateInterval() {
+        // TODO
+        return null;
+    }
+
+    public void AddToAlbum(Photo photo) {
         photoList.add(photo);
         // TODO more
     }

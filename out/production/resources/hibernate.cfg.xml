@@ -6,9 +6,13 @@
     <session-factory>
         <property name="connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
         <property name="connection.url">jdbc:derby://localhost/PhotoManager;create=true;</property>
+        <!--TODO: remove create=true after first execution of app-->
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
         <property name="use_sql_comments">true</property>
-        <property name="hbm2ddl.auto">create-drop</property>
+        <property name="hbm2ddl.auto">update</property>
+        <mapping class="model.Photo"/>
+        <mapping class="model.PhotoAlbum"/>
+        <mapping class="model.Tag"/>
     </session-factory>
 </hibernate-configuration>
