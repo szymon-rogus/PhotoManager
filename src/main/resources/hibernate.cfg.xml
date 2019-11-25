@@ -12,7 +12,7 @@
         <property name="use_sql_comments">true</property>
         <property name="hbm2ddl.auto">update</property>
         <mapping class="model.Photo"/>
-        <mapping class="model.PhotoAlbum"/>
+        <mapping class="model.Album"/>
         <mapping class="model.Tag"/>
     </session-factory>
 </hibernate-configuration>

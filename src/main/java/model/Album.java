@@ -20,7 +20,7 @@ import java.util.Map;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PhotoAlbum {
+public class Album {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -52,7 +52,7 @@ public class PhotoAlbum {
     private Map<String, Tag> tagMap;
 
 
-    public PhotoAlbum(@NonNull String name,@NonNull List<Photo> photoList) {
+    public Album(@NonNull String name, @NonNull List<Photo> photoList) {
         this.name = name;
         this.nameProperty = new SimpleStringProperty(name);
         this.photoList = photoList;

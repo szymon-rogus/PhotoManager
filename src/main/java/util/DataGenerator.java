@@ -1,10 +1,10 @@
 package util;
 
-import model.PhotoAlbum;
+import model.Album;
 
 public class DataGenerator {
 
     public static void generateAlbums(){
-        PhotoAlbum album1 = new PhotoAlbum("Holidays-2019", null);
+        Album album1 = new Album("Holidays-2019", null);
     }
 }
