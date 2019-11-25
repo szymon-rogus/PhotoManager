@@ -2,6 +2,8 @@
 # Edit at https://www.gitignore.io/?templates=gradle
 .idea
 .idea/*
+out
+out/*
 ### Gradle ###
 .gradle
 .gradle/*
