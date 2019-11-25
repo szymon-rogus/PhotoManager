@@ -1,6 +1,4 @@
-plugins {
-    id 'java'
-}
+apply plugin: "java"
 
 group 'PhotoManager'
 version '1.0-SNAPSHOT'
@@ -21,3 +19,4 @@ dependencies {
     compile group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
 }
+

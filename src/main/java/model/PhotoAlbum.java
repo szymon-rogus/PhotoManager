@@ -1,6 +1,8 @@
 package model;
 
 import com.sun.istack.Nullable;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +31,9 @@ public class PhotoAlbum {
     @NonNull
     private String name;
 
+    @Transient
+    private StringProperty nameProperty;
+
     @OneToMany(orphanRemoval = true)
     @NonNull
     private List<Photo> photoList;
@@ -49,7 +54,16 @@ public class PhotoAlbum {
 
     public PhotoAlbum(@NonNull String name,@NonNull List<Photo> photoList) {
         this.name = name;
+        this.nameProperty = new SimpleStringProperty(name);
         this.photoList = photoList;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public StringProperty getNameProperty(){
+        return nameProperty;
     }
 
     public List<Photo> getByTag(String tag) {

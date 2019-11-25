@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
-        <property name="connection.url">jdbc:derby://localhost/PhotoManager;create=true;</property>
+        <property name="connection.url">jdbc:derby://localhost/PhotoManager;create=false;</property>
         <!--TODO: remove create=true after first execution of app-->
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
