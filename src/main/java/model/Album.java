@@ -51,8 +51,6 @@ public class Album {
     @Nullable
     private Map<String, Tag> tagMap;
 
-    public Album() {}
-
     public Album(@NonNull String name, @NonNull List<Photo> photoList) {
         this.name = name;
         this.nameProperty = new SimpleStringProperty(name);

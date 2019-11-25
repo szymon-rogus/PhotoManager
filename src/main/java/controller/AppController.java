@@ -51,7 +51,7 @@ public class AppController {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(app.AppManager.class
                     .getResource("/view/CreateAlbumDialog.fxml"));
-            BorderPane page = (BorderPane) loader.load();
+            BorderPane page = loader.load();
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
