@@ -6,6 +6,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
+
 import java.io.IOException;
 
 
@@ -44,13 +45,15 @@ public class AppController {
 
     }
 
-    public void showDialogWindow(Stage primaryStage) {
+    public void showDialogWindow() {
         try {
+            // Load the fxml file and create a new stage for the dialog
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(app.AppManager.class
-                    .getResource("../view/CreateAlbumDialog.fxml"));
-            BorderPane page = loader.load();
+                    .getResource("/view/CreateAlbumDialog.fxml"));
+            BorderPane page = (BorderPane) loader.load();
 
+            // Create the dialog Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Stwórz album");
             dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -58,7 +61,13 @@ public class AppController {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
+            // Set the person into the presenter.
+            CreateAlbumDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+
+            // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

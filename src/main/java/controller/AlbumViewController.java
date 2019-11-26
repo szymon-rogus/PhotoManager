@@ -51,8 +51,7 @@ public class AlbumViewController {
 
     @FXML
     private void handleCreateAlbumAction(ActionEvent event) {
-        this.createAlbumDialogController = new CreateAlbumDialogController();
-        createAlbumDialogController.showDialogWindow(primaryStage);
+        appController.showDialogWindow();
     }
 
     @FXML
