@@ -19,6 +19,8 @@ import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 
@@ -31,6 +33,8 @@ public class AlbumViewController {
 
     private AppController appController;
 
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm");
+
     @FXML
     private TableView<Album> albumsTable;
 
@@ -38,10 +42,10 @@ public class AlbumViewController {
     private TableColumn<Album, String> nameColumn;
 
     @FXML
-    private TableColumn<Album, LocalDate> creationDateColumn;
+    private TableColumn<Album, Date> creationDateColumn;
 
     @FXML
-    private TableColumn<Album, LocalDate> modificationDateColumn;
+    private TableColumn<Album, Date> modificationDateColumn;
 
     @FXML
     private TableColumn<Album, String> tagsColumn;
@@ -52,14 +56,19 @@ public class AlbumViewController {
     @FXML
     private void handleCreateAlbumAction(ActionEvent event) {
         appController.showDialogWindow();
+        reload();
     }
 
     @FXML
     private void initialize(){
         nameColumn.setCellValueFactory(new PropertyValueFactory<Album, String>("name"));
-        creationDateColumn.setCellValueFactory(new PropertyValueFactory<Album, LocalDate>("creationDate"));
-        modificationDateColumn.setCellValueFactory(new PropertyValueFactory<Album, LocalDate>("modificationDate"));
+        creationDateColumn.setCellValueFactory(new PropertyValueFactory<Album, Date>("creationDate"));
+        modificationDateColumn.setCellValueFactory(new PropertyValueFactory<Album, Date>("modificationDate"));
         //tagsColumn.setCellValueFactory((new PropertyValueFactory<Album, String>("tagMap"))); // 5 najliczniejszych, TODO
+        reload();
+    }
+
+    public void reload() {
         albumsTable.setItems(getAllAlbums());
     }
 

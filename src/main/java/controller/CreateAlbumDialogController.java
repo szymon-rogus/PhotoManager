@@ -51,24 +51,4 @@ public class CreateAlbumDialogController {
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
-
-//    public void showDialogWindow(Stage primaryStage) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader();
-//            loader.setLocation(app.AppManager.class
-//                    .getResource("/view/CreateAlbumDialog.fxml"));
-//            BorderPane page = loader.load();
-//
-//            dialogStage = new Stage();
-//            dialogStage.setTitle("Stwórz album");
-//            dialogStage.initModality(Modality.WINDOW_MODAL);
-//            dialogStage.initOwner(primaryStage);
-//            Scene scene = new Scene(page);
-//            dialogStage.setScene(scene);
-//
-//            dialogStage.showAndWait();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
