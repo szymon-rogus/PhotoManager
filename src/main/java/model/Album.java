@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
-@Table(name = "PHOTO_ALBUM")
+@Table(name = "ALBUM")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -51,6 +51,7 @@ public class Album {
     @Nullable
     private Map<String, Tag> tagMap;
 
+    public Album() {}
 
     public Album(@NonNull String name, @NonNull List<Photo> photoList) {
         this.name = name;
