@@ -11,6 +11,8 @@ import java.io.IOException;
 
 public class AppManager extends Application{
 
+    public static Session session;
+
     private static SessionFactory sessionFactory = null;
     private AppController appController;
 

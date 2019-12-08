@@ -80,6 +80,7 @@ public class AlbumViewController {
 
     public ObservableList<Album> getAllAlbums() {
         final ObservableList<Album> albumList = FXCollections.observableArrayList();
+        this.session = AppManager.getSessionFactory().getCurrentSession();
         final Transaction tx = session.beginTransaction();
         albumList.addAll(session.createQuery("FROM Album", Album.class).list());
         tx.commit();

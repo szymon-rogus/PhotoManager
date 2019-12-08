@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.NoArgsConstructor;
 import model.Album;
 import model.Photo;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -62,11 +63,10 @@ public class PhotoViewController {
 
     @FXML
     private void initialize(){
-        this.session = AppManager.getSessionFactory().getCurrentSession();
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        reload();
+        //reload();
     }
 
     public void reload() {
@@ -84,8 +84,11 @@ public class PhotoViewController {
 
     private ObservableList<Photo> getPhotos() {
         final ObservableList<Photo> photoList = FXCollections.observableArrayList();
+        this.session = AppManager.getSessionFactory().getCurrentSession();
         final Transaction tx = session.beginTransaction();
-        photoList.addAll(session.createQuery("FROM Photo",Photo.class).list());
+
+        photoList.addAll(album.getPhotoList());
+        //photoList.addAll(session.createQuery("FROM Photo",Photo.class).list());
         tx.commit();
 
         return photoList;

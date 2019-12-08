@@ -24,7 +24,7 @@ import java.util.List;
 
 public class AddPhotoDialogController {
 
-    private static final String PHOTO_PATH = "D:\\Java\\Projekty\\PhotoManager\\src\\main\\resources\\Photos";  //TODO: Change on relative path
+    private static final String PHOTO_PATH = "/home/szymon/Zadania/JAVA/TO2P/src/main/resources/photos";  //TODO: Change on relative path
 
     private static final String TITLE = "Wybierz zdjęcie";
 
@@ -82,10 +82,10 @@ public class AddPhotoDialogController {
                 date = Date.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             }
             if (nameTextField.getText() != null && !nameTextField.getText().equals("")) {
-                photoDestination = new File(photoDirectory.getAbsolutePath() + "\\" + nameTextField.getText() + "." + ImageAssembler.getExtension(uploadedPhoto.getName()));
+                photoDestination = new File(photoDirectory.getAbsolutePath() + "/" + nameTextField.getText() + "." + ImageAssembler.getExtension(uploadedPhoto.getName()));
                 photo = new Photo(nameTextField.getText(), descriptionTextArea.getText(), date, new ArrayList<>()); //TODO: Tags
             } else {
-                photoDestination = new File(photoDirectory.getAbsolutePath() + "\\" + uploadedPhoto.getName());
+                photoDestination = new File(photoDirectory.getAbsolutePath() + "/" + uploadedPhoto.getName());
                 photo = new Photo(uploadedPhoto.getName(), descriptionTextArea.getText(), date, new ArrayList<>()); //TODO: Tags
             }
             try {
