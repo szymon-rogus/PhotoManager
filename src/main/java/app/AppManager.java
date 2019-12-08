@@ -7,13 +7,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.io.IOException;
+
 public class AppManager extends Application{
 
     private static SessionFactory sessionFactory = null;
     private AppController appController;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         this.appController = new AppController(primaryStage);
         this.appController.initRootLayout();
     }

@@ -1,5 +1,6 @@
 package controller;
 
+import app.AppManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,13 +8,16 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
 import model.Album;
+import org.hibernate.Session;
 import org.hibernate.Transaction;
-import java.util.ArrayList;
 
 
 @NoArgsConstructor
 public class CreateAlbumDialogController {
+
     private Stage dialogStage;
+
+    private Session session;
 
     @FXML
     private TextField nameTextField;
@@ -25,17 +29,20 @@ public class CreateAlbumDialogController {
     private Button okButton;
 
     @FXML
+    private void initialize() {
+        this.session = AppManager.getSessionFactory().getCurrentSession();
+    }
+
+    @FXML
     private void handleCancelAction(ActionEvent event) {
         dialogStage.close();
     }
 
     @FXML
     private void handleOkAction(ActionEvent event) {
-        if(!nameTextField.getText().isEmpty()) {
-            Transaction tx = app.AppManager.getSessionFactory().getCurrentSession().
-                    beginTransaction();
-            app.AppManager.getSessionFactory().getCurrentSession().
-                    save(new Album(nameTextField.getText(), new ArrayList<>()));
+        if (!nameTextField.getText().isEmpty()) {
+            final Transaction tx = session.beginTransaction();
+            session.save(new Album(nameTextField.getText()));
             tx.commit();
             dialogStage.close();
         }
