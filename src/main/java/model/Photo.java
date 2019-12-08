@@ -1,7 +1,6 @@
 package model;
 
 import com.sun.istack.Nullable;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -14,7 +13,6 @@ import java.util.List;
 @Table(name = "PHOTOS")
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Photo {
 
     @Id
@@ -25,10 +23,6 @@ public class Photo {
     @Column(name = "NAME")
     @NonNull
     private String name;
-
-    @Column(name = "IMAGE")
-    @NonNull
-    private byte[] image;
 
     @Column(name = "DESCRIPTION")
     @Nullable
@@ -42,8 +36,14 @@ public class Photo {
     private List<Tag> tags;
 
 
-    public Photo(@NonNull String name,@NonNull byte[] image) {
+    public Photo(@NonNull String name) {
         this.name = name;
-        this.image = image;
+    }
+
+    public Photo(@NonNull String name, String description, Date date, List<Tag> tags) {
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.tags = tags;
     }
 }

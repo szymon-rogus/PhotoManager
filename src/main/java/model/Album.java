@@ -8,9 +8,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +37,8 @@ public class Album {
     @Transient
     private StringProperty nameProperty;
 
-    @OneToMany(orphanRemoval = true)
-    @NonNull
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Photo> photoList;
 
     @Column(name = "CREATION_DATE")
@@ -51,18 +54,16 @@ public class Album {
     @Nullable
     private Map<String, Tag> tagMap;
 
-    public Album(@NonNull String name, @NonNull List<Photo> photoList) {
+    public Album(@NonNull String name, List<Photo> photoList) {
         this.name = name;
         this.nameProperty = new SimpleStringProperty(name);
         this.photoList = photoList;
     }
 
-    public String getName(){
-        return name;
-    }
-
-    public StringProperty getNameProperty(){
-        return nameProperty;
+    public Album(@NonNull String name) {
+        this.name = name;
+        this.nameProperty = new SimpleStringProperty(name);
+        this.photoList = new ArrayList<>();
     }
 
     public List<Photo> getByTag(String tag) {
@@ -80,7 +81,7 @@ public class Album {
         return null;
     }
 
-    public void AddToAlbum(Photo photo) {
+    public void addToAlbum(Photo photo) {
         photoList.add(photo);
         // TODO more
     }
