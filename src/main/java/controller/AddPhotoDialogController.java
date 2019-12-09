@@ -11,9 +11,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
+import model.Tag;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.ImageAssembler;
+import util.TagParser;
 
 import java.io.*;
 import java.time.ZoneId;
@@ -24,7 +26,7 @@ import java.util.List;
 
 public class AddPhotoDialogController {
 
-    private static final String PHOTO_PATH = "/home/szymon/Zadania/JAVA/TO2P/src/main/resources/photos";  //TODO: Change on relative path
+    private static String PHOTO_PATH;
 
     private static final String TITLE = "Wybierz zdjęcie";
 
@@ -44,10 +46,16 @@ public class AddPhotoDialogController {
     private TextField nameTextField;
 
     @FXML
+    private TextField localizationTextField;
+
+    @FXML
     private DatePicker datePicker;
 
     @FXML
     private TextArea descriptionTextArea;
+
+    @FXML
+    private TextArea tagsTextArea;
 
     @FXML
     private Button cancelButton;
@@ -60,6 +68,7 @@ public class AddPhotoDialogController {
 
     @FXML
     private void initialize() {
+        this.PHOTO_PATH = System.getProperty("user.dir") + "\\src\\main\\resources\\photos";
         this.session = AppManager.getSessionFactory().getCurrentSession();
     }
 
@@ -77,17 +86,25 @@ public class AddPhotoDialogController {
             }
             File photoDestination;
             Photo photo;
+
+            List<Tag> tags = new ArrayList<>();
+            if(tagsTextArea.getText() != null && !tagsTextArea.getText().equals("")) {
+                    tags = TagParser.parse(tagsTextArea.getText());
+            }
+
             Date date = null;
             if (datePicker.getValue() != null) {
                 date = Date.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
             }
+
             if (nameTextField.getText() != null && !nameTextField.getText().equals("")) {
                 photoDestination = new File(photoDirectory.getAbsolutePath() + "/" + nameTextField.getText() + "." + ImageAssembler.getExtension(uploadedPhoto.getName()));
-                photo = new Photo(nameTextField.getText(), descriptionTextArea.getText(), date, new ArrayList<>()); //TODO: Tags
+                photo = new Photo(nameTextField.getText() + "." + ImageAssembler.getExtension(uploadedPhoto.getName()), localizationTextField.getText(), descriptionTextArea.getText(), date, tags);
             } else {
                 photoDestination = new File(photoDirectory.getAbsolutePath() + "/" + uploadedPhoto.getName());
-                photo = new Photo(uploadedPhoto.getName(), descriptionTextArea.getText(), date, new ArrayList<>()); //TODO: Tags
+                photo = new Photo(uploadedPhoto.getName(), localizationTextField.getText(), descriptionTextArea.getText(), date, tags);
             }
+
             try {
                 final InputStream is = new FileInputStream(uploadedPhoto);
                 final OutputStream os = new FileOutputStream(photoDestination);
@@ -101,6 +118,7 @@ public class AddPhotoDialogController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             album.addToAlbum(photo);
             final Transaction tx = session.beginTransaction();
             session.update(album);

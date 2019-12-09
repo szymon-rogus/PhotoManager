@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import lombok.NoArgsConstructor;
 import model.Album;
 import model.Photo;
@@ -41,7 +42,7 @@ public class PhotoViewController {
     private TableColumn<Photo, String> nameColumn;
 
     @FXML
-    private TableColumn<Photo, String> descriptionColumn;
+    private TableColumn<Photo, String> localizationColumn;
 
     @FXML
     private TableColumn<Photo, Date> dateColumn;
@@ -62,11 +63,18 @@ public class PhotoViewController {
     }
 
     @FXML
+    private void handlePhotoClickedAction(MouseEvent event) throws IOException {
+        if (event.getClickCount() == 2) {
+            appController.showPhotoDialog(photosTable.getSelectionModel().getSelectedItem());
+        }
+    }
+
+    @FXML
     private void initialize(){
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        localizationColumn.setCellValueFactory(new PropertyValueFactory<>("localization"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        //reload();
+//        tagsColumn.setCellValueFactory(new PropertyValueFactory<>("tags")); //TODO
     }
 
     public void reload() {
