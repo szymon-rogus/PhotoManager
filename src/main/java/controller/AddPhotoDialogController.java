@@ -98,10 +98,10 @@ public class AddPhotoDialogController {
             }
 
             if (nameTextField.getText() != null && !nameTextField.getText().equals("")) {
-                photoDestination = new File(photoDirectory.getAbsolutePath() + "/" + nameTextField.getText() + "." + ImageAssembler.getExtension(uploadedPhoto.getName()));
+                photoDestination = new File(photoDirectory.getAbsolutePath() + "\\" + nameTextField.getText() + "." + ImageAssembler.getExtension(uploadedPhoto.getName()));
                 photo = new Photo(nameTextField.getText() + "." + ImageAssembler.getExtension(uploadedPhoto.getName()), localizationTextField.getText(), descriptionTextArea.getText(), date, tags);
             } else {
-                photoDestination = new File(photoDirectory.getAbsolutePath() + "/" + uploadedPhoto.getName());
+                photoDestination = new File(photoDirectory.getAbsolutePath() + "\\" + uploadedPhoto.getName());
                 photo = new Photo(uploadedPhoto.getName(), localizationTextField.getText(), descriptionTextArea.getText(), date, tags);
             }
 

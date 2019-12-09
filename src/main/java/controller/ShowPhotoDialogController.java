@@ -41,7 +41,7 @@ public class ShowPhotoDialogController {
 
     public void setPhoto(Photo photo) {
         this.photo = photo;
-        imageView.setImage(new Image((new File("src/main/resources/photos/" + photo.getNameWithExt())).toURI().toString()));
+        imageView.setImage(new Image((new File("src\\main\\resources\\photos\\" + photo.getNameWithExt())).toURI().toString()));
         if(photo.getDescription() != null) {
             this.descriptionTextArea.setText(photo.getDescription());
         }
