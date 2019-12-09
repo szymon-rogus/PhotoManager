@@ -28,11 +28,15 @@ public class Photo {
     @Nullable
     private String description;
 
+    @Column(name = "LOCALIZATION")
+    @Nullable
+    private String localization;
+
     @Column(name = "DATE")
     @Nullable
     private Date date;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Tag> tags;
 
 
@@ -40,10 +44,20 @@ public class Photo {
         this.name = name;
     }
 
-    public Photo(@NonNull String name, String description, Date date, List<Tag> tags) {
+    public Photo(@NonNull String name, String localization, String description, Date date, List<Tag> tags) {
         this.name = name;
+        this.localization = localization;
         this.description = description;
         this.date = date;
         this.tags = tags;
     }
+
+    public String getName() {
+        return this.name.substring(0, this.name.lastIndexOf("."));
+    }
+
+    public String getNameWithExt() {
+        return this.name;
+    }
+
 }
