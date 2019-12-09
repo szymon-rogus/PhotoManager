@@ -26,7 +26,7 @@ import java.util.List;
 
 public class AddPhotoDialogController {
 
-    private static String PHOTO_PATH;
+    private static final String PHOTO_PATH = System.getProperty("user.dir") + "\\src\\main\\resources\\photos";
 
     private static final String TITLE = "Wybierz zdjęcie";
 
@@ -68,7 +68,6 @@ public class AddPhotoDialogController {
 
     @FXML
     private void initialize() {
-        this.PHOTO_PATH = System.getProperty("user.dir") + "\\src\\main\\resources\\photos";
         this.session = AppManager.getSessionFactory().getCurrentSession();
     }
 
