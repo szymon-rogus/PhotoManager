@@ -4,10 +4,12 @@ import app.AppManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
 import model.Album;
+import model.Photo;
 
 import java.io.IOException;
 
@@ -80,7 +82,7 @@ public class AppController {
     public void showAddPhotoDialog(Album album) throws IOException {
         final FXMLLoader loader = new FXMLLoader();
         loader.setLocation(app.AppManager.class.getResource("/view/AddPhotoDialog.fxml"));
-        final BorderPane page = loader.load();
+        final VBox page = loader.load();
 
         final Stage dialogStage = new Stage();
         dialogStage.setTitle(ADD_PHOTO_DIALOG_TITLE);
@@ -92,6 +94,26 @@ public class AppController {
         final AddPhotoDialogController controller = loader.getController();
         controller.setDialogStage(dialogStage);
         controller.setAlbum(album);
+
+        dialogStage.setResizable(false);
+        dialogStage.showAndWait();
+    }
+
+    public void showPhotoDialog(Photo photo) throws IOException {
+        final FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(app.AppManager.class.getResource("/view/ShowPhotoDialog.fxml"));
+        final VBox page = loader.load();
+
+        final Stage dialogStage = new Stage();
+        dialogStage.setTitle(photo.getName());
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        final Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+
+        final ShowPhotoDialogController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setPhoto(photo);
 
         dialogStage.setResizable(false);
         dialogStage.showAndWait();
