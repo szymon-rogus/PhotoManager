@@ -13,6 +13,7 @@ import model.Tag;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 
@@ -41,7 +42,8 @@ public class ShowPhotoDialogController {
 
     public void setPhoto(Photo photo) {
         this.photo = photo;
-        imageView.setImage(new Image((new File("src\\main\\resources\\photos\\" + photo.getNameWithExt())).toURI().toString()));
+
+        imageView.setImage(new Image(new ByteArrayInputStream(photo.getImage())));
         if(photo.getDescription() != null) {
             this.descriptionTextArea.setText(photo.getDescription());
         }
