@@ -24,6 +24,11 @@ public class Photo {
     @NonNull
     private String name;
 
+    @Lob
+    @Column(name = "IMAGE", columnDefinition = "BLOB")
+    @NonNull
+    private byte[] image;
+
     @Column(name = "DESCRIPTION")
     @Nullable
     private String description;
@@ -39,25 +44,12 @@ public class Photo {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Tag> tags;
 
-
-    public Photo(@NonNull String name) {
+    public Photo(@NonNull String name, @NonNull byte[] image, String localization, String description, Date date, List<Tag> tags) {
         this.name = name;
-    }
-
-    public Photo(@NonNull String name, String localization, String description, Date date, List<Tag> tags) {
-        this.name = name;
+        this.image = image;
         this.localization = localization;
         this.description = description;
         this.date = date;
         this.tags = tags;
     }
-
-    public String getName() {
-        return this.name.substring(0, this.name.lastIndexOf("."));
-    }
-
-    public String getNameWithExt() {
-        return this.name;
-    }
-
 }

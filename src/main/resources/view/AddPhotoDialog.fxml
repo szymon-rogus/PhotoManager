@@ -90,9 +90,6 @@
                             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                         </HBox.margin></Button>
                 </children>
-                <BorderPane.margin>
-                    <Insets left="5.0" right="5.0" top="5.0" />
-                </BorderPane.margin>
             </HBox>
         </children>
 </VBox>
