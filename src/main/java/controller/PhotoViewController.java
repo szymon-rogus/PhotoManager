@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -13,12 +14,14 @@ import javafx.scene.input.MouseEvent;
 import lombok.NoArgsConstructor;
 import model.Album;
 import model.Photo;
-import org.hibernate.Hibernate;
+import model.Tag;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 public class PhotoViewController {
@@ -48,7 +51,7 @@ public class PhotoViewController {
     private TableColumn<Photo, Date> dateColumn;
 
     @FXML
-    private TableColumn<Photo, String> tagsColumn;
+    private TableColumn<Photo, List<Tag>> tagsColumn;
 
 
     @FXML
@@ -58,7 +61,7 @@ public class PhotoViewController {
     }
 
     @FXML
-    private void handleBackAction(ActionEvent event) throws IOException{
+    private void handleBackAction(ActionEvent event) throws IOException {
         appController.initRootLayout();
     }
 
@@ -70,11 +73,23 @@ public class PhotoViewController {
     }
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         localizationColumn.setCellValueFactory(new PropertyValueFactory<>("localization"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-//        tagsColumn.setCellValueFactory(new PropertyValueFactory<>("tags")); //TODO
+        final PropertyValueFactory<Photo, List<Tag>> tagValueFactory = new PropertyValueFactory<>("tags");
+        tagsColumn.setCellValueFactory(tagValueFactory);
+        tagsColumn.setCellFactory(col -> new TableCell<Photo, List<Tag>>() {
+            @Override
+            public void updateItem(List<Tag> tags, boolean empty) {
+                super.updateItem(tags, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(tags.stream().map(Tag::getName).collect(Collectors.joining(", ")));
+                }
+            }
+        });
     }
 
     public void reload() {
@@ -86,7 +101,7 @@ public class PhotoViewController {
         reload();
     }
 
-    public void setAppController(AppController appController){
+    public void setAppController(AppController appController) {
         this.appController = appController;
     }
 
@@ -96,7 +111,6 @@ public class PhotoViewController {
         final Transaction tx = session.beginTransaction();
 
         photoList.addAll(album.getPhotoList());
-        //photoList.addAll(session.createQuery("FROM Photo",Photo.class).list());
         tx.commit();
 
         return photoList;

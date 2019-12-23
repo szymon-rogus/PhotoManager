@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98df1884-175b-4cbc-b61a-211ea1c82e46" name="Default Changelist" comment="Changes in model and dependencies:&#10;* added lombok to dependencies&#10;* created hibernate entities from java classes&#10;* created converter for images">
+    <list default="true" id="fa24168b-850b-4a38-9442-d3b1c7de238b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/AddPhotoDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/AddPhotoDialogController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/ShowPhotoDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/ShowPhotoDialogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Photo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Photo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/ImageAssembler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/AddPhotoDialog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/AddPhotoDialog.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +94,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1575840207066" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1575906917074" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/view" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -159,13 +161,14 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="98df1884-175b-4cbc-b61a-211ea1c82e46" name="Default Changelist" comment="" />
+      <changelist id="fa24168b-850b-4a38-9442-d3b1c7de238b" name="Default Changelist" comment="" />
       <created>1574532984191</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1574532984191</updated>
       <workItem from="1574532987541" duration="5055000" />
       <workItem from="1575900684312" duration="125000" />
+      <workItem from="1576521872107" duration="6681000" />
     </task>
     <task id="LOCAL-00001" summary="Model">
       <created>1574629378796</created>
@@ -199,113 +202,34 @@
     <option name="LAST_COMMIT_MESSAGE" value="Changes in model and dependencies:&#10;* added lombok to dependencies&#10;* created hibernate entities from java classes&#10;* created converter for images" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1493" height="100" key="GridCell.Tab.0.bottom" timestamp="1575899334449">
+    <state width="1493" height="156" key="GridCell.Tab.0.bottom" timestamp="1576534261928">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="100" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1575899334449" />
-    <state width="1493" height="100" key="GridCell.Tab.0.center" timestamp="1575899334449">
+    <state width="1493" height="156" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1576534261928" />
+    <state width="1493" height="156" key="GridCell.Tab.0.center" timestamp="1576534261928">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="100" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1575899334449" />
-    <state width="1493" height="100" key="GridCell.Tab.0.left" timestamp="1575899334449">
+    <state width="1493" height="156" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1576534261928" />
+    <state width="1493" height="156" key="GridCell.Tab.0.left" timestamp="1576534261928">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="100" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1575899334449" />
-    <state width="1493" height="100" key="GridCell.Tab.0.right" timestamp="1575899334449">
+    <state width="1493" height="156" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1576534261928" />
+    <state width="1493" height="156" key="GridCell.Tab.0.right" timestamp="1576534261928">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="100" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1575899334449" />
+    <state width="1493" height="156" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1576534261928" />
+    <state x="249" y="6" key="SettingsEditor" timestamp="1575991185331">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="249" y="6" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1575991185331" />
     <state x="465" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1575900684811">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="465" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1575900684811" />
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>Invalid</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>PhotoManager</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>Gradle: junit:junit:4.12</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+    <state x="209" y="52" key="new project wizard" timestamp="1575992644736">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="209" y="52" key="new project wizard/0.0.1536.864@0.0.1536.864" timestamp="1575992644736" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>
