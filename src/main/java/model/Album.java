@@ -1,5 +1,6 @@
 package model;
 
+import app.AppManager;
 import com.sun.istack.Nullable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -54,6 +55,10 @@ public class Album {
     @Nullable
     private Map<String, Tag> tagMap;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<User> users;
+
     public Album(@NonNull String name, List<Photo> photoList) {
         this.name = name;
         this.nameProperty = new SimpleStringProperty(name);
@@ -64,6 +69,11 @@ public class Album {
         this.name = name;
         this.nameProperty = new SimpleStringProperty(name);
         this.photoList = new ArrayList<>();
+        this.users = new ArrayList<>();
+        final User user = AppManager.getSessionUser();
+        users.add(user);
+        user.addAlbum(this);
+
     }
 
     public List<Photo> getByTag(String tag) {

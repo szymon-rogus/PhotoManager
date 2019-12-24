@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Album;
@@ -15,6 +14,7 @@ import model.Photo;
 import model.Tag;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import util.AlbumChange;
 import util.TagParser;
 
 import java.io.*;
@@ -81,8 +81,8 @@ public class AddPhotoDialogController {
             Photo photo;
 
             List<Tag> tags = new ArrayList<>();
-            if(tagsTextArea.getText() != null && !tagsTextArea.getText().equals("")) {
-                    tags = TagParser.parse(tagsTextArea.getText());
+            if (tagsTextArea.getText() != null && !tagsTextArea.getText().equals("")) {
+                tags = TagParser.parse(tagsTextArea.getText());
             }
 
             Date date = null;
@@ -102,6 +102,9 @@ public class AddPhotoDialogController {
                 final Transaction tx = session.beginTransaction();
                 session.update(album);
                 tx.commit();
+                final AlbumChange albumChange = new AlbumChange(album);
+                albumChange.addChangedPhoto(photo);
+                AppManager.getAlbumChangeListener().addAlbumChange(albumChange);
                 dialogStage.close();
             } catch (IOException e) {
                 e.printStackTrace();

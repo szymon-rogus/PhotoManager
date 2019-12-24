@@ -1,20 +1,14 @@
 package controller;
 
-import app.AppManager;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import model.Album;
 import model.Photo;
 import model.Tag;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.text.SimpleDateFormat;
 
 public class ShowPhotoDialogController {

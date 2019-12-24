@@ -13,7 +13,6 @@ import javafx.scene.input.MouseEvent;
 import lombok.NoArgsConstructor;
 import model.Album;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
@@ -48,6 +47,9 @@ public class AlbumViewController {
     private Button createAlbumButton;
 
     @FXML
+    private Button changeEmailButton;
+
+    @FXML
     private void handleCreateAlbumAction(ActionEvent event) throws IOException {
         appController.showCreateAlbumDialog();
         reload();
@@ -55,9 +57,21 @@ public class AlbumViewController {
 
     @FXML
     private void handleAlbumClickedAction(MouseEvent event) throws IOException {
-        if (event.getClickCount() == 2) {
-            appController.showPhotoView(albumsTable.getSelectionModel().getSelectedItem());
+        if (albumsTable.getSelectionModel().getSelectedItem() != null) {
+            if (event.getClickCount() == 2) {
+                appController.showPhotoView(albumsTable.getSelectionModel().getSelectedItem());
+            }
         }
+    }
+
+    @FXML
+    private void handleChangeEmail(ActionEvent event) throws IOException {
+        appController.showChangeEmailDialog();
+    }
+
+    @FXML
+    private void handleLogout(ActionEvent event) throws IOException {
+        appController.initRootLayout();
     }
 
     @FXML
@@ -80,10 +94,7 @@ public class AlbumViewController {
 
     public ObservableList<Album> getAllAlbums() {
         final ObservableList<Album> albumList = FXCollections.observableArrayList();
-        this.session = AppManager.getSessionFactory().getCurrentSession();
-        final Transaction tx = session.beginTransaction();
-        albumList.addAll(session.createQuery("FROM Album", Album.class).list());
-        tx.commit();
+        albumList.addAll(AppManager.getSessionUser().getAlbums());
 
         return albumList;
     }

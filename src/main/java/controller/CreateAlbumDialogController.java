@@ -41,8 +41,9 @@ public class CreateAlbumDialogController {
     @FXML
     private void handleOkAction(ActionEvent event) {
         if (!nameTextField.getText().isEmpty()) {
+            final Album album = new Album(nameTextField.getText());
             final Transaction tx = session.beginTransaction();
-            session.save(new Album(nameTextField.getText()));
+            session.save(album);
             tx.commit();
             dialogStage.close();
         }

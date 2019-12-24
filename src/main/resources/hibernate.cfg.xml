@@ -15,8 +15,9 @@
         <property name="connection.pool_size">1</property>
         <property name="dialect">org.hibernate.dialect.H2Dialect</property>
         <property name="hbm2ddl.auto">update</property>
-        <mapping class="model.Tag" />
-        <mapping class="model.Photo" />
-        <mapping class="model.Album" />
+        <mapping class="model.Tag"/>
+        <mapping class="model.Photo"/>
+        <mapping class="model.Album"/>
+        <mapping class="model.User"/>
     </session-factory>
 </hibernate-configuration>

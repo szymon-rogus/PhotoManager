@@ -33,10 +33,13 @@ public class PhotoViewController {
     private Session session;
 
     @FXML
-    Button addPhotoButton;
+    private Button addPhotoButton;
 
     @FXML
-    Button backButton;
+    private Button shareAlbumButton;
+
+    @FXML
+    private Button backButton;
 
     @FXML
     private TableView<Photo> photosTable;
@@ -62,14 +65,19 @@ public class PhotoViewController {
 
     @FXML
     private void handleBackAction(ActionEvent event) throws IOException {
-        appController.initRootLayout();
+        appController.showAlbumView();
     }
 
     @FXML
     private void handlePhotoClickedAction(MouseEvent event) throws IOException {
-        if (event.getClickCount() == 2) {
+        if (event.getClickCount() == 2 && photosTable.getSelectionModel().getSelectedItem() != null) {
             appController.showPhotoDialog(photosTable.getSelectionModel().getSelectedItem());
         }
+    }
+
+    @FXML
+    private void handleShareAlbum(ActionEvent event) throws IOException {
+        appController.showShareAlbumDialog(album);
     }
 
     @FXML
@@ -109,7 +117,6 @@ public class PhotoViewController {
         final ObservableList<Photo> photoList = FXCollections.observableArrayList();
         this.session = AppManager.getSessionFactory().getCurrentSession();
         final Transaction tx = session.beginTransaction();
-
         photoList.addAll(album.getPhotoList());
         tx.commit();
 
