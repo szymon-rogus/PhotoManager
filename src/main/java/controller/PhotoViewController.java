@@ -16,8 +16,10 @@ import model.Album;
 import model.Photo;
 import model.Tag;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -42,6 +44,9 @@ public class PhotoViewController {
     private Button backButton;
 
     @FXML
+    private Button removePhotoButton;
+
+    @FXML
     private TableView<Photo> photosTable;
 
     @FXML
@@ -61,6 +66,22 @@ public class PhotoViewController {
     private void handleAddPhotoAction(ActionEvent event) throws IOException {
         appController.showAddPhotoDialog(album);
         reload();
+    }
+
+    @FXML
+    private void handleRemovePhotoAction(ActionEvent event) throws IOException {
+        JDialog.setDefaultLookAndFeelDecorated(true);
+        int response = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            session = AppManager.getSessionFactory().openSession();
+            Photo photo = photosTable.getSelectionModel().getSelectedItem();
+            album.removeFromAlbum(photo);
+            Transaction tx = session.beginTransaction();
+            session.update(album);
+            tx.commit();
+            reload();
+        }
     }
 
     @FXML

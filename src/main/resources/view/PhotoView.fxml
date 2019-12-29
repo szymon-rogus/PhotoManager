@@ -32,6 +32,12 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </VBox.margin>
                 </Button>
+                <Button fx:id="removePhotoButton" alignment="TOP_CENTER" mnemonicParsing="false"
+                        onAction="#handleRemovePhotoAction" text="Usuń zdjęcie">
+                    <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </VBox.margin>
+                </Button>
                 <Button fx:id="shareAlbumButton" alignment="TOP_CENTER" mnemonicParsing="false"
                         onAction="#handleShareAlbum" text="Udostepnij album">
                     <VBox.margin>

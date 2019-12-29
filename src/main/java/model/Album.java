@@ -96,4 +96,8 @@ public class Album {
         // TODO more
     }
 
+    public void removeFromAlbum(Photo photo) {
+        photoList.remove(photo);
+    }
+
 }
