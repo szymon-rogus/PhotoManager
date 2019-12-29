@@ -4,11 +4,9 @@ import app.AppManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lombok.NoArgsConstructor;
@@ -75,8 +73,10 @@ public class PhotoViewController {
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             session = AppManager.getSessionFactory().openSession();
-            Photo photo = photosTable.getSelectionModel().getSelectedItem();
-            album.removeFromAlbum(photo);
+            List<Photo> photosToRemove = photosTable.getSelectionModel().getSelectedItems();
+            for(Photo photo : photosToRemove){
+                album.removeFromAlbum(photo);
+            }
             Transaction tx = session.beginTransaction();
             session.update(album);
             tx.commit();
@@ -119,6 +119,16 @@ public class PhotoViewController {
                 }
             }
         });
+
+
+        photosTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                photosTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            }
+        });
+
+
     }
 
     public void reload() {
