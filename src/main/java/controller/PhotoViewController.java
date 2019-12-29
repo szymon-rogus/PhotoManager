@@ -45,6 +45,9 @@ public class PhotoViewController {
     private Button removePhotoButton;
 
     @FXML
+    private Button editPhotoButton;
+
+    @FXML
     private TableView<Photo> photosTable;
 
     @FXML
@@ -85,15 +88,13 @@ public class PhotoViewController {
     }
 
     @FXML
-    private void handleBackAction(ActionEvent event) throws IOException {
-        appController.showAlbumView();
+    private void handleEditButton(ActionEvent event) {
+
     }
 
     @FXML
-    private void handlePhotoClickedAction(MouseEvent event) throws IOException {
-        if (event.getClickCount() == 2 && photosTable.getSelectionModel().getSelectedItem() != null) {
-            appController.showPhotoDialog(photosTable.getSelectionModel().getSelectedItem());
-        }
+    private void handleBackAction(ActionEvent event) throws IOException {
+        appController.showAlbumView();
     }
 
     @FXML
@@ -120,15 +121,20 @@ public class PhotoViewController {
             }
         });
 
-
         photosTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 photosTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+                if(event.getClickCount() == 2){
+                    try {
+                        appController.showPhotoDialog(photosTable.getSelectionModel().getSelectedItem());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
-
-
     }
 
     public void reload() {
