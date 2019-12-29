@@ -98,6 +98,13 @@ public class PhotoViewController {
     }
 
     @FXML
+    private void handlePhotoClickedAction(MouseEvent event) throws IOException {
+        if (event.getClickCount() == 2 && photosTable.getSelectionModel().getSelectedItem() != null) {
+            appController.showPhotoDialog(photosTable.getSelectionModel().getSelectedItem());
+        }
+    }
+
+    @FXML
     private void handleShareAlbum(ActionEvent event) throws IOException {
         appController.showShareAlbumDialog(album);
     }
