@@ -23,6 +23,8 @@ public class AppController {
 
     private static final String ADD_PHOTO_DIALOG_TITLE = "Dodaj zdjęcie";
 
+    private static final String EDIT_PHOTO_DIALOG_TITLE = "Dodaj zdjęcie";
+
     private static final String CREATE_ACCOUNT_DIALOG_TITLE = "Stwórz konto";
 
     private static final String CHANGE_EMAIL_DIALOG_TITLE = "Zmień email";
@@ -114,6 +116,27 @@ public class AppController {
 
         final AddPhotoDialogController controller = loader.getController();
         controller.setDialogStage(dialogStage);
+        controller.setAlbum(album);
+
+        dialogStage.setResizable(false);
+        dialogStage.showAndWait();
+    }
+
+    public void showEditPhotoDialog(Photo photo, Album album) throws IOException {
+        final FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(app.AppManager.class.getResource("/view/EditPhotoDialog.fxml"));
+        final VBox page = loader.load();
+
+        final Stage dialogStage = new Stage();
+        dialogStage.setTitle(EDIT_PHOTO_DIALOG_TITLE);
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        final Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+
+        final EditPhotoDialogController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setPhoto(photo);
         controller.setAlbum(album);
 
         dialogStage.setResizable(false);

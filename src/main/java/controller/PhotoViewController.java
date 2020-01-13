@@ -16,9 +16,12 @@ import model.Tag;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import util.TagParser;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,6 +51,21 @@ public class PhotoViewController {
     private Button editPhotoButton;
 
     @FXML
+    private Button showAll;
+
+    @FXML
+    private TextField searchField;
+
+    @FXML
+    private Button searchLocalization;
+
+    @FXML
+    private Button searchDate;
+
+    @FXML
+    private Button searchTags;
+
+    @FXML
     private TableView<Photo> photosTable;
 
     @FXML
@@ -62,6 +80,65 @@ public class PhotoViewController {
     @FXML
     private TableColumn<Photo, List<Tag>> tagsColumn;
 
+    @FXML
+    private void showAll(ActionEvent event) throws IOException {
+        reload();
+    }
+
+    @FXML
+    private void handleSearchLocalizationAction(ActionEvent event) throws IOException {
+        final ObservableList<Photo> photoList = FXCollections.observableArrayList();
+        this.session = AppManager.getSessionFactory().getCurrentSession();
+        final Transaction tx = session.beginTransaction();
+
+        String data = searchField.getText();
+        for(Photo photo : album.getPhotoList()){
+            if(photo.getLocalization().contains(data) && !photoList.contains(photo))
+                photoList.add(photo);
+        }
+
+        tx.commit();
+        photosTable.setItems(photoList);
+    }
+
+    @FXML
+    private void handleSearchTagsAction(ActionEvent event) throws IOException {
+        final ObservableList<Photo> photoList = FXCollections.observableArrayList();
+        this.session = AppManager.getSessionFactory().getCurrentSession();
+        final Transaction tx = session.beginTransaction();
+
+        String data = searchField.getText();
+        for(Photo photo : album.getPhotoList()){
+            for(Tag tag : photo.getTags()){
+                if(tag.getName().contains(data) && !photoList.contains(photo))
+                    photoList.add(photo);
+            }
+        }
+
+        tx.commit();
+        photosTable.setItems(photoList);
+    }
+
+    @FXML
+    private void handleSearchDateAction(ActionEvent event) {
+        final ObservableList<Photo> photoList = FXCollections.observableArrayList();
+        this.session = AppManager.getSessionFactory().getCurrentSession();
+        final Transaction tx = session.beginTransaction();
+
+        String data = searchField.getText();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for(Photo photo : album.getPhotoList()){
+            try {
+                if(dateFormat.format(album.getPhotoList()).equals(data) && !photoList.contains(photo))
+                    photoList.add(photo);
+            } catch ( IllegalArgumentException e) {
+                e.getStackTrace();
+            }
+        }
+
+        tx.commit();
+        photosTable.setItems(photoList);
+    }
 
     @FXML
     private void handleAddPhotoAction(ActionEvent event) throws IOException {
@@ -88,8 +165,25 @@ public class PhotoViewController {
     }
 
     @FXML
-    private void handleEditButton(ActionEvent event) {
-
+    private void handleEditButton(ActionEvent event) throws IOException {
+        appController.showEditPhotoDialog(photosTable.getSelectionModel().getSelectedItem(), this.album);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        localizationColumn.setCellValueFactory(new PropertyValueFactory<>("localization"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        final PropertyValueFactory<Photo, List<Tag>> tagValueFactory = new PropertyValueFactory<>("tags");
+        tagsColumn.setCellValueFactory(tagValueFactory);
+        tagsColumn.setCellFactory(col -> new TableCell<Photo, List<Tag>>() {
+            @Override
+            public void updateItem(List<Tag> tags, boolean empty) {
+                super.updateItem(tags, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(tags.stream().map(Tag::getName).collect(Collectors.joining(", ")));
+                }
+            }
+        });
+        reload();
     }
 
     @FXML
