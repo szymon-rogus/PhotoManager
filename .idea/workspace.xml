@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="98df1884-175b-4cbc-b61a-211ea1c82e46" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/AppController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/PhotoViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/PhotoViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Photo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Photo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/PhotoView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/PhotoView.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -108,11 +105,12 @@
     <session id="652372973">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -130,14 +128,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="fxml" value="314" />
-          <entry key="java" value="2766" />
-          <entry key="txt" value="89" />
+          <entry key="java" value="2780" />
+          <entry key="txt" value="156" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2766" />
-          <entry key="PLAIN_TEXT" value="89" />
+          <entry key="JAVA" value="2780" />
+          <entry key="PLAIN_TEXT" value="156" />
           <entry key="XML" value="314" />
         </counts>
       </usages-collector>
@@ -148,8 +146,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/controller/PhotoViewController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="118" column="28" selection-start-line="118" selection-start-column="28" selection-end-line="118" selection-end-column="28" />
+            <state relative-caret-position="147">
+              <caret line="112" column="51" lean-forward="true" selection-start-line="112" selection-start-column="51" selection-end-line="112" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -586,7 +584,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-1" />
     <option name="width" value="961" />
     <option name="height" value="1053" />
@@ -598,6 +596,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -674,9 +673,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -688,7 +686,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1578919654672" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1578919833250" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../lab-gui-2/to-javafx-3" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -816,7 +814,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577644992683</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="# edit button&#10;* searching options&#10;* messy code (soreh)">
+      <created>1578919711891</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1578919711891</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -832,9 +837,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="961" height="1053" extended-state="4" />
+    <frame x="-1" y="0" width="1922" height="1053" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33587787" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18370607" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Persistence" order="2" side_tool="true" />
       <window_info id="Designer" order="3" />
@@ -846,7 +852,7 @@
       <window_info id="simpleUML" order="9" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32913843" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49944994" visible="true" weight="0.32894737" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49944994" visible="true" weight="0.32894737" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.15460527" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -923,7 +929,8 @@
     <MESSAGE value="Added user accounts feature, sending emails and sharing albums" />
     <MESSAGE value="Added user accounts feature, sending emails and sharing albums&#10;* deleteing single photos with warning box" />
     <MESSAGE value="Added user accounts feature, sending emails and sharing albums&#10;* deleteing single photos with warning box&#10;* delete multiple with ctrl or shift" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added user accounts feature, sending emails and sharing albums&#10;* deleteing single photos with warning box&#10;* delete multiple with ctrl or shift" />
+    <MESSAGE value="# edit button&#10;* searching options&#10;* messy code (soreh)" />
+    <option name="LAST_COMMIT_MESSAGE" value="# edit button&#10;* searching options&#10;* messy code (soreh)" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1493" height="100" key="GridCell.Tab.0.bottom" timestamp="1575899334449">
@@ -979,28 +986,28 @@
     </entry>
     <entry file="jar://D:/Program Files/Java/jdk1.8.0_161/src.zip!/java/util/Date.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/view/ChangeEmailDialog.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="45" column="77" selection-start-line="45" selection-start-column="77" selection-end-line="45" selection-end-column="77" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/view/CreateAccountView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="29">
           <caret line="24" column="32" lean-forward="true" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/view/ShareAlbumDialog.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
           <caret line="45" column="98" selection-start-line="45" selection-start-column="80" selection-end-line="45" selection-end-column="98" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -1044,12 +1051,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/view/SendEmailsView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/Album.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1107,12 +1114,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/view/CreateAlbumDialog.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="690">
           <caret line="46" column="25" lean-forward="true" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/util/TagParser.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1125,12 +1132,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/view/AddPhotoDialog.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="36" column="31" lean-forward="true" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/CreateAlbumDialogController.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1182,20 +1189,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/view/ShowPhotoDialog.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="735">
           <caret line="61" column="38" lean-forward="true" selection-start-line="61" selection-start-column="38" selection-end-line="61" selection-end-column="38" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/view/AlbumView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="38" column="47" selection-start-line="38" selection-start-column="47" selection-end-line="38" selection-end-column="47" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/app/AppManager.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1208,12 +1215,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/view/LogInView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
           <caret line="40" column="38" lean-forward="true" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/LogInController.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1238,12 +1245,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/view/EditPhotoDialog.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="61" column="28" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/EditPhotoDialogController.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1256,12 +1263,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/view/PhotoView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1260">
           <caret line="84" column="38" lean-forward="true" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
         </state>
       </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/AppController.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1275,8 +1282,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/controller/PhotoViewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="118" column="28" selection-start-line="118" selection-start-column="28" selection-end-line="118" selection-end-column="28" />
+        <state relative-caret-position="147">
+          <caret line="112" column="51" lean-forward="true" selection-start-line="112" selection-start-column="51" selection-end-line="112" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

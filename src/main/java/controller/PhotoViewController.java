@@ -129,7 +129,7 @@ public class PhotoViewController {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for(Photo photo : album.getPhotoList()){
             try {
-                if(dateFormat.format(album.getPhotoList()).equals(data) && !photoList.contains(photo))
+                if(dateFormat.format(photo.getDate()).equals(data))
                     photoList.add(photo);
             } catch ( IllegalArgumentException e) {
                 e.getStackTrace();
