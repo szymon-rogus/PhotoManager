@@ -39,8 +39,6 @@ public class AddPhotoDialogController {
 
     private Album album;
 
-    private Session session;
-
     @FXML
     private TextField nameTextField;
 
@@ -64,11 +62,6 @@ public class AddPhotoDialogController {
 
     @FXML
     private Button uploadPhotoButton;
-
-    @FXML
-    private void initialize() {
-        this.session = AppManager.getSessionFactory().getCurrentSession();
-    }
 
     @FXML
     private void handleCancelAction(ActionEvent event) {
@@ -99,6 +92,7 @@ public class AddPhotoDialogController {
                 }
 
                 album.addToAlbum(photo);
+                final Session session = AppManager.getSessionFactory().getCurrentSession();
                 final Transaction tx = session.beginTransaction();
                 session.update(album);
                 tx.commit();

@@ -11,10 +11,9 @@
     <center>
         <TableView BorderPane.alignment="CENTER" fx:id="albumsTable" onMouseClicked="#handleAlbumClickedAction">
             <columns>
-                <TableColumn prefWidth="${albumsTable.width*0.2}" text="Nazwa" fx:id="nameColumn"/>
-                <TableColumn prefWidth="${albumsTable.width*0.2}" text="Data stworzenia" fx:id="creationDateColumn"/>
-                <TableColumn prefWidth="${albumsTable.width*0.2}" text="Data modyfikacji" fx:id="modificationDateColumn"/>
-                <TableColumn prefWidth="${albumsTable.width*0.4}" text="Tagi" fx:id="tagsColumn"/>
+                <TableColumn prefWidth="${albumsTable.width/3}" text="Nazwa" fx:id="nameColumn"/>
+                <TableColumn prefWidth="${albumsTable.width/3}" text="Data stworzenia" fx:id="creationDateColumn"/>
+                <TableColumn prefWidth="${albumsTable.width/3}" text="Data modyfikacji" fx:id="modificationDateColumn"/>
             </columns>
         </TableView>
     </center>

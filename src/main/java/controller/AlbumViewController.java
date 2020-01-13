@@ -41,9 +41,6 @@ public class AlbumViewController {
     private TableColumn<Album, Date> modificationDateColumn;
 
     @FXML
-    private TableColumn<Album, String> tagsColumn;
-
-    @FXML
     private Button createAlbumButton;
 
     @FXML
@@ -80,7 +77,6 @@ public class AlbumViewController {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         creationDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
         modificationDateColumn.setCellValueFactory(new PropertyValueFactory<>("modificationDate"));
-        //tagsColumn.setCellValueFactory((new PropertyValueFactory<Album, String>("tagMap"))); //TODO: 5 najliczniejszych
         reload();
     }
 

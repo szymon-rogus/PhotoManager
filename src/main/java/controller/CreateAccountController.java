@@ -74,7 +74,8 @@ public class CreateAccountController {
             final byte[] hash = factory.generateSecret(spec).getEncoded();
             final Session session = AppManager.getSessionFactory().getCurrentSession();
             final Transaction tx = session.beginTransaction();
-            final User user = User.builder().name(nameTextField.getText())
+            final User user = User.builder()
+                    .name(nameTextField.getText())
                     .password(hash)
                     .email(emailTextField.getText().isEmpty() ? null : emailTextField.getText())
                     .albums(new ArrayList<>())

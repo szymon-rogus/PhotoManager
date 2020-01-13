@@ -1,7 +1,6 @@
 package model;
 
 import app.AppManager;
-import com.sun.istack.Nullable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import lombok.AllArgsConstructor;
@@ -17,7 +16,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "ALBUM")
@@ -49,11 +47,6 @@ public class Album {
     @Column(name = "LAST_MODIFIED")
     @UpdateTimestamp
     private Date modificationDate;
-
-    @OneToMany
-    @MapKey(name = "name")
-    @Nullable
-    private Map<String, Tag> tagMap;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @Fetch(value = FetchMode.SUBSELECT)
@@ -93,7 +86,6 @@ public class Album {
 
     public void addToAlbum(Photo photo) {
         photoList.add(photo);
-        // TODO more
     }
 
     public void removeFromAlbum(Photo photo) {
