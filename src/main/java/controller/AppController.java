@@ -53,6 +53,7 @@ public class AppController {
 
         primaryScene = new Scene(rootLayout);
         primaryStage.setScene(primaryScene);
+        logInController.setDialogStage(primaryStage);
         primaryStage.show();
     }
 

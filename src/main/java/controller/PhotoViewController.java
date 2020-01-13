@@ -7,6 +7,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lombok.NoArgsConstructor;
@@ -19,11 +21,15 @@ import org.hibernate.Transaction;
 import util.TagParser;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -52,6 +58,9 @@ public class PhotoViewController {
 
     @FXML
     private Button showAll;
+
+    @FXML
+    private Button showMostPopularTags;
 
     @FXML
     private TextField searchField;
@@ -83,6 +92,44 @@ public class PhotoViewController {
     @FXML
     private void showAll(ActionEvent event) throws IOException {
         reload();
+    }
+
+    public void showMostPopularTagFrame(String tag) {
+        JDialog.setDefaultLookAndFeelDecorated(true);
+        Frame frame = new Frame("Most popular Tag");
+        JOptionPane.showMessageDialog(frame, "The most popular Tag is ' " + tag + " '");
+    }
+
+    @FXML
+    public void handleSortByTags(ActionEvent event) throws IOException {
+        ObservableList<Tag> TagList = FXCollections.observableArrayList();
+        final ObservableList<Photo> photoList = FXCollections.observableArrayList();
+        this.session = AppManager.getSessionFactory().getCurrentSession();
+        final Transaction tx = session.beginTransaction();
+
+        for(Photo photo : album.getPhotoList()) {
+            TagList.addAll(photo.getTags());
+        }
+
+        String mostCommonTag = TagList.stream()
+                .filter(it -> Objects.nonNull(it))
+                .collect(Collectors.groupingBy(Tag::getName, Collectors.counting()))
+                .entrySet().stream().max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey).orElse(null);
+
+        for(Photo photo : album.getPhotoList()) {
+            for(Tag tag : photo.getTags()) {
+                if(tag.getName().equals(mostCommonTag)){
+                    photoList.add(photo);
+
+                }
+            }
+        }
+
+        tx.commit();
+        photosTable.setItems(photoList);
+
+        showMostPopularTagFrame(mostCommonTag);
     }
 
     @FXML
