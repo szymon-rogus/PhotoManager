@@ -4,6 +4,7 @@ import com.sun.istack.Nullable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "PHOTOS")
 @Getter
+@Setter
 @NoArgsConstructor
 public class Photo {
 

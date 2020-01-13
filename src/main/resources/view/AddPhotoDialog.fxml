@@ -4,92 +4,95 @@
 
 <?import javafx.geometry.Insets?>
 <VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.AddPhotoDialogController"
-            maxHeight="500.0" prefWidth="300.0"
-            alignment="TOP_CENTER">
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.AddPhotoDialogController"
+      maxHeight="500.0" prefWidth="300.0"
+      alignment="TOP_CENTER">
 
 
-        <children>
-            <Button fx:id="uploadPhotoButton" mnemonicParsing="false" onAction="#handleUploadPhotoAction"
-                    text="Wybierz zdjęcie">
-            </Button>
+    <children>
+        <Button fx:id="uploadPhotoButton" mnemonicParsing="false" onAction="#handleUploadPhotoAction"
+                text="Wybierz zdjęcie">
+        </Button>
 
-            <GridPane hgap="5.0" vgap="5.0">
-                <columnConstraints>
-                    <ColumnConstraints />
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                </columnConstraints>
+        <GridPane hgap="5.0" vgap="5.0">
+            <columnConstraints>
+                <ColumnConstraints/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
 
-                <children>
-                    <Label text="Nazwa">
-                        <GridPane.margin>
-                            <Insets left="5.0" right="5.0"/>
-                        </GridPane.margin>
-                    </Label>
-                    <TextField fx:id="nameTextField" GridPane.columnIndex="1">
-                        <GridPane.margin>
-                            <Insets left="5.0" right="5.0"/>
-                        </GridPane.margin>
-                    </TextField>
+            <children>
+                <Label text="Nazwa">
+                    <GridPane.margin>
+                        <Insets left="5.0" right="5.0"/>
+                    </GridPane.margin>
+                </Label>
+                <TextField fx:id="nameTextField" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets left="5.0" right="5.0"/>
+                    </GridPane.margin>
+                </TextField>
 
-                    <Label text="Lokalizacja">
-                        <GridPane.margin>
-                            <Insets left="5.0" right="5.0" top="80.0"/>
-                        </GridPane.margin>
-                    </Label>
-                    <TextField fx:id="localizationTextField" GridPane.columnIndex="1">
-                        <GridPane.margin>
-                            <Insets left="5.0" right="5.0" top="80.0"/>
-                        </GridPane.margin>
-                    </TextField>
+                <Label text="Lokalizacja">
+                    <GridPane.margin>
+                        <Insets left="5.0" right="5.0" top="80.0"/>
+                    </GridPane.margin>
+                </Label>
+                <TextField fx:id="localizationTextField" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets left="5.0" right="5.0" top="80.0"/>
+                    </GridPane.margin>
+                </TextField>
 
-                    <Label text="Data">
-                        <GridPane.margin>
-                            <Insets left="5.0" right="5.0" top="160.0"/>
-                        </GridPane.margin>
-                    </Label>
-                    <DatePicker fx:id="datePicker" GridPane.columnIndex="1">
-                        <GridPane.margin>
-                            <Insets left="5.0" right="5.0" top="160.0"/>
-                        </GridPane.margin>
-                    </DatePicker>
+                <Label text="Data">
+                    <GridPane.margin>
+                        <Insets left="5.0" right="5.0" top="160.0"/>
+                    </GridPane.margin>
+                </Label>
+                <DatePicker fx:id="datePicker" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets left="5.0" right="5.0" top="160.0"/>
+                    </GridPane.margin>
+                </DatePicker>
 
-                    <Label text="Opis">
-                        <GridPane.margin>
-                            <Insets left="5.0" right="5.0" top="290.0" />
-                        </GridPane.margin>
-                    </Label>
-                    <TextArea fx:id="descriptionTextArea" GridPane.columnIndex="1" maxHeight="80" wrapText="true">
-                        <GridPane.margin>
-                            <Insets left="5.0" right="5.0" top="290.0" />
-                        </GridPane.margin>
-                    </TextArea>
+                <Label text="Opis">
+                    <GridPane.margin>
+                        <Insets left="5.0" right="5.0" top="290.0"/>
+                    </GridPane.margin>
+                </Label>
+                <TextArea fx:id="descriptionTextArea" GridPane.columnIndex="1" maxHeight="80" wrapText="true">
+                    <GridPane.margin>
+                        <Insets left="5.0" right="5.0" top="290.0"/>
+                    </GridPane.margin>
+                </TextArea>
 
-                    <Label text="Tagi">
-                        <GridPane.margin>
-                            <Insets left="5.0" right="5.0" top="450.0"/>
-                        </GridPane.margin>
-                    </Label>
-                    <TextArea fx:id="tagsTextArea" GridPane.columnIndex="1" maxHeight="60" wrapText="true">
-                        <GridPane.margin>
-                            <Insets left="5.0" right="5.0" top="450.0"/>
-                        </GridPane.margin>
-                    </TextArea>
-                </children>
-            </GridPane>
+                <Label text="Tagi">
+                    <GridPane.margin>
+                        <Insets left="5.0" right="5.0" top="450.0"/>
+                    </GridPane.margin>
+                </Label>
+                <TextArea fx:id="tagsTextArea" GridPane.columnIndex="1" maxHeight="60" wrapText="true">
+                    <GridPane.margin>
+                        <Insets left="5.0" right="5.0" top="450.0"/>
+                    </GridPane.margin>
+                </TextArea>
+            </children>
+        </GridPane>
 
-            <HBox alignment="BOTTOM_RIGHT" spacing="5.0">
-                <children>
-                    <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelAction" prefWidth="100.0" text="Anuluj">
-                        <HBox.margin>
-                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                        </HBox.margin></Button>
-                    <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOkAction" prefWidth="100.0" text="Ok">
-                        <HBox.margin>
-                            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                        </HBox.margin></Button>
-                </children>
-            </HBox>
-        </children>
+        <HBox alignment="BOTTOM_RIGHT" spacing="5.0">
+            <children>
+                <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelAction" prefWidth="100.0"
+                        text="Anuluj">
+                    <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOkAction" prefWidth="100.0" text="Ok">
+                    <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </HBox.margin>
+                </Button>
+            </children>
+        </HBox>
+    </children>
 </VBox>

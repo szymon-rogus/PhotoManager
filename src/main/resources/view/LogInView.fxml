@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.LogInController"
+            prefHeight="200.0" prefWidth="400.0">
+    <top>
+        <HBox alignment="BOTTOM_LEFT" spacing="5.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="errorLabel">
+                    <GridPane.margin>
+                        <Insets bottom="-150.0" left="5.0" right="5.0" top="150.0"/>
+                    </GridPane.margin>
+                </Label>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="0.0" left="5.0" right="5.0" top="5.0"/>
+            </BorderPane.margin>
+        </HBox>
+    </top>
+    <center>
+        <GridPane hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0"/>
+            </rowConstraints>
+            <children>
+                <Label text="Login">
+                    <GridPane.margin>
+                        <Insets bottom="100.0" left="5.0" right="5.0" top="50.0"/>
+                    </GridPane.margin>
+                </Label>
+                <TextField fx:id="nameTextField" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets bottom="100.0" left="5.0" right="5.0" top="50.0"/>
+                    </GridPane.margin>
+                </TextField>
+                <Label text="Hasło">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="30.0"/>
+                    </GridPane.margin>
+                </Label>
+                <PasswordField fx:id="passwordTextField" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="30.0"/>
+                    </GridPane.margin>
+                </PasswordField>
+            </children>
+        </GridPane>
+    </center>
+    <bottom>
+        <HBox alignment="BOTTOM_RIGHT" spacing="5.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="exitButton" mnemonicParsing="false" onAction="#handleExitAction" prefWidth="100.0"
+                        text="Wyjdź">
+                    <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="logInButton" mnemonicParsing="false" onAction="#handleLogInAction" prefWidth="100.0"
+                        text="Zaloguj">
+                    <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="createAccountButton" mnemonicParsing="false" onAction="#handleCreateAccountAction"
+                        prefWidth="100.0" text="Utwórz konto">
+                    <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </HBox.margin>
+                </Button>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="0.0" left="5.0" right="5.0" top="5.0"/>
+            </BorderPane.margin>
+        </HBox>
+    </bottom>
+    <opaqueInsets>
+        <Insets/>
+    </opaqueInsets>
+
+</BorderPane>
