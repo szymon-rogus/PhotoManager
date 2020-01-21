@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98df1884-175b-4cbc-b61a-211ea1c82e46" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/AlbumChangeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/AlbumChangeListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controller/AddPhotoDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/AddPhotoDialogController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +204,7 @@
       <updated>1574532984191</updated>
       <workItem from="1574532987541" duration="5055000" />
       <workItem from="1575900684312" duration="125000" />
-      <workItem from="1579465088041" duration="32118000" />
+      <workItem from="1579465088041" duration="32457000" />
     </task>
     <task id="LOCAL-00001" summary="Model">
       <created>1574629378796</created>
@@ -278,22 +272,22 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="473" y="173" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1579545233615" />
-    <state width="1493" height="212" key="GridCell.Tab.0.bottom" timestamp="1579583754911">
+    <state width="1493" height="26" key="GridCell.Tab.0.bottom" timestamp="1579584092455">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="212" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1579583754911" />
-    <state width="1493" height="212" key="GridCell.Tab.0.center" timestamp="1579583754911">
+    <state width="1493" height="26" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1579584092455" />
+    <state width="1493" height="26" key="GridCell.Tab.0.center" timestamp="1579584092455">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="212" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1579583754911" />
-    <state width="1493" height="212" key="GridCell.Tab.0.left" timestamp="1579583754910">
+    <state width="1493" height="26" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1579584092455" />
+    <state width="1493" height="26" key="GridCell.Tab.0.left" timestamp="1579584092455">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="212" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1579583754910" />
-    <state width="1493" height="212" key="GridCell.Tab.0.right" timestamp="1579583754911">
+    <state width="1493" height="26" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1579584092455" />
+    <state width="1493" height="26" key="GridCell.Tab.0.right" timestamp="1579584092455">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="212" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1579583754911" />
+    <state width="1493" height="26" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1579584092455" />
     <state x="249" y="6" key="SettingsEditor" timestamp="1579545243726">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

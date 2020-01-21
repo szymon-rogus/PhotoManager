@@ -84,25 +84,6 @@ public class AddPhotoDialogController {
             }).collect(Collectors.toSet());
         });
 
-        TextFields.bindAutoCompletion(tagsTextField, t -> {
-            Set<String> tags = new HashSet<>();
-            for(Album album : AppManager.getSessionUser().getAlbums()) {
-                for(Photo photo : album.getPhotoList()){
-                    for(Tag tag : photo.getTags()) {
-                        tags.add(tag.getName());
-                    }
-                }
-            }
-            return tags.stream().filter(elem ->
-            {
-                if(t.getUserText().length() > 0 && !elem.equalsIgnoreCase(t.getUserText())) {
-                    return elem.toLowerCase().startsWith(t.getUserText().toLowerCase());
-                }
-                return false;
-            }).collect(Collectors.toSet());
-        });
-
-
         AtomicReference<String> currentTagsWithoutLastOne = new AtomicReference<>();
         AutoCompletionBinding<String> tagsAutoCompletion = TextFields.bindAutoCompletion(tagsTextField, t -> {
             String tagsString = TagParser.parseAsString(t.getUserText());
