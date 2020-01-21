@@ -6,7 +6,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.PhotoViewController"
+            fx:controller="controller.AllPhotoViewController"
             prefHeight="720.0" prefWidth="1280.0">
 
     <center>
@@ -26,34 +26,9 @@
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </opaqueInsets>
             <children>
-                <Button fx:id="addPhotoButton" alignment="TOP_CENTER" mnemonicParsing="false"
-                        onAction="#handleAddPhotoAction" text="Dodaj zdjęcie">
-                    <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="editPhotoButton" alignment="TOP_CENTER" mnemonicParsing="false"
-                        onAction="#handleEditButton" text="Edytuj zdjęcie">
-                    <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="removePhotoButton" alignment="TOP_CENTER" mnemonicParsing="false"
-                        onAction="#handleRemovePhotoAction" text="Usuń zdjęcie">
-                    <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </VBox.margin>
-                </Button>
-                <Button fx:id="shareAlbumButton" alignment="TOP_CENTER" mnemonicParsing="false"
-                        onAction="#handleShareAlbum" text="Udostepnij album">
-                    <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </VBox.margin>
-                </Button>
-
-                <Label text="Szukaj:">
+                                <Label text="Szukaj:">
                     <GridPane.margin>
-                        <Insets bottom="100.0" left="5.0" right="5.0" top="100.0"/>
+                        <Insets bottom="100.0" left="5.0" right="5.0" top="50.0"/>
                     </GridPane.margin>
                 </Label>
                 <TextField fx:id="searchField" GridPane.columnIndex="1">

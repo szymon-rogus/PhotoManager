@@ -19,6 +19,7 @@ public class AlbumChangeListener {
             return;
         }
         matchingAlbumChanges.get(0).getPhotosChanged().addAll(albumChange.getPhotosChanged());
+        sendEmails();
     }
 
     public void sendEmails() {

@@ -4,19 +4,26 @@ import app.AppManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lombok.NoArgsConstructor;
 import model.Album;
+import model.Photo;
+import model.User;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -44,7 +51,41 @@ public class AlbumViewController {
     private Button createAlbumButton;
 
     @FXML
+    private Button deleteAlbumButton;
+
+    @FXML
+    private Button allPhotoViewButton;
+
+    @FXML
     private Button changeEmailButton;
+
+    @FXML
+    private Button logoutButton;
+
+    @FXML
+    private void initialize() {
+        this.session = AppManager.getSessionFactory().getCurrentSession();
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        creationDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
+        modificationDateColumn.setCellValueFactory(new PropertyValueFactory<>("modificationDate"));
+
+        albumsTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                albumsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+                if(event.getClickCount() == 2){
+                    try {
+                        appController.showPhotoView(albumsTable.getSelectionModel().getSelectedItem());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        reload();
+    }
 
     @FXML
     private void handleCreateAlbumAction(ActionEvent event) throws IOException {
@@ -53,12 +94,32 @@ public class AlbumViewController {
     }
 
     @FXML
-    private void handleAlbumClickedAction(MouseEvent event) throws IOException {
-        if (albumsTable.getSelectionModel().getSelectedItem() != null) {
-            if (event.getClickCount() == 2) {
-                appController.showPhotoView(albumsTable.getSelectionModel().getSelectedItem());
+    private void handleDeleteAlbumAction(ActionEvent event) throws IOException {
+        if(albumsTable.getSelectionModel().getSelectedItem() != null) {
+            JDialog.setDefaultLookAndFeelDecorated(true);
+            int response = JOptionPane.showConfirmDialog(null, "Jesteú pewien?", "Potwierdü",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                session = AppManager.getSessionFactory().openSession();
+                List<Album> albumsToRemove = albumsTable.getSelectionModel().getSelectedItems();
+                for (Album album : albumsToRemove) {
+                    for (User user : album.getUsers()) {
+                        user.removeFromUser(album);
+                    }
+                    session.remove(album);
+                }
+
+                Transaction tx = session.beginTransaction();
+                session.update(AppManager.getSessionUser());
+                tx.commit();
+                reload();
             }
         }
+    }
+
+    @FXML
+    private void handleAllPhotoViewAction(ActionEvent event) throws IOException {
+        appController.showAllPhotoView();
     }
 
     @FXML
@@ -69,15 +130,6 @@ public class AlbumViewController {
     @FXML
     private void handleLogout(ActionEvent event) throws IOException {
         appController.initRootLayout();
-    }
-
-    @FXML
-    private void initialize() {
-        this.session = AppManager.getSessionFactory().getCurrentSession();
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        creationDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
-        modificationDateColumn.setCellValueFactory(new PropertyValueFactory<>("modificationDate"));
-        reload();
     }
 
     public void reload() {

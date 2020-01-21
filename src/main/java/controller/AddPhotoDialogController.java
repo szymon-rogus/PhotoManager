@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
 import model.Tag;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.AlbumChange;
@@ -20,10 +22,9 @@ import util.TagParser;
 import java.io.*;
 import java.nio.file.Files;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 public class AddPhotoDialogController {
 
@@ -52,7 +53,7 @@ public class AddPhotoDialogController {
     private TextArea descriptionTextArea;
 
     @FXML
-    private TextArea tagsTextArea;
+    private TextField tagsTextField;
 
     @FXML
     private Button cancelButton;
@@ -62,6 +63,83 @@ public class AddPhotoDialogController {
 
     @FXML
     private Button uploadPhotoButton;
+
+    @FXML
+    private void initialize() {
+        TextFields.bindAutoCompletion(localizationTextField, t -> {
+            Set<String> localizations = new HashSet<>();
+            for(Album album : AppManager.getSessionUser().getAlbums()) {
+                for(Photo photo : album.getPhotoList()){
+                    if(photo.getLocalization().length() > 0) {
+                        localizations.add(photo.getLocalization());
+                    }
+                }
+            }
+            return localizations.stream().filter(elem ->
+            {
+                if(t.getUserText().length() > 0 && !elem.equalsIgnoreCase(t.getUserText())) {
+                    return elem.toLowerCase().startsWith(t.getUserText().toLowerCase());
+                }
+                return false;
+            }).collect(Collectors.toSet());
+        });
+
+        TextFields.bindAutoCompletion(tagsTextField, t -> {
+            Set<String> tags = new HashSet<>();
+            for(Album album : AppManager.getSessionUser().getAlbums()) {
+                for(Photo photo : album.getPhotoList()){
+                    for(Tag tag : photo.getTags()) {
+                        tags.add(tag.getName());
+                    }
+                }
+            }
+            return tags.stream().filter(elem ->
+            {
+                if(t.getUserText().length() > 0 && !elem.equalsIgnoreCase(t.getUserText())) {
+                    return elem.toLowerCase().startsWith(t.getUserText().toLowerCase());
+                }
+                return false;
+            }).collect(Collectors.toSet());
+        });
+
+
+        AtomicReference<String> currentTagsWithoutLastOne = new AtomicReference<>();
+        AutoCompletionBinding<String> tagsAutoCompletion = TextFields.bindAutoCompletion(tagsTextField, t -> {
+            String tagsString = TagParser.parseAsString(t.getUserText());
+            String lastTag;
+            if(tagsString.lastIndexOf(" ") != -1) {
+                currentTagsWithoutLastOne.set(tagsString.
+                        substring(0, tagsString.lastIndexOf(" ")) + " ");
+                lastTag = TagParser.parseAsStringGetLast(t.getUserText());
+            }
+            else {
+                currentTagsWithoutLastOne.set("");
+                lastTag = tagsString;
+            }
+
+            Set<String> tags = new HashSet<>();
+            for(Album album : AppManager.getSessionUser().getAlbums()) {
+                for(Photo photo : album.getPhotoList()){
+                    for(Tag tag : photo.getTags()) {
+                        tags.add(tag.getName());
+                    }
+                }
+            }
+
+            return tags.stream().filter(elem ->
+            {
+                if(t.getUserText().length() > 0 && !elem.equalsIgnoreCase(lastTag)) {
+                    return elem.toLowerCase().startsWith(lastTag.toLowerCase());
+                }
+                return false;
+            }).collect(Collectors.toSet());
+        });
+
+        tagsAutoCompletion.setOnAutoCompleted(e -> {
+            tagsTextField.setText(currentTagsWithoutLastOne + e.getCompletion() + " ");
+            tagsTextField.end();
+        });
+    }
 
     @FXML
     private void handleCancelAction(ActionEvent event) {
@@ -74,8 +152,8 @@ public class AddPhotoDialogController {
             Photo photo;
 
             List<Tag> tags = new ArrayList<>();
-            if (tagsTextArea.getText() != null && !tagsTextArea.getText().equals("")) {
-                tags = TagParser.parse(tagsTextArea.getText());
+            if (tagsTextField.getText() != null && !tagsTextField.getText().equals("")) {
+                tags = TagParser.parse(tagsTextField.getText());
             }
 
             Date date = null;
@@ -115,6 +193,7 @@ public class AddPhotoDialogController {
 
         uploadedPhoto = fileChooser.showOpenDialog(dialogStage);
     }
+
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;

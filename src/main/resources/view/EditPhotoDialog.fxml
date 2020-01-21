@@ -16,7 +16,7 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controller.EditPhotoDialogController"
       minHeight="-Infinity"
-      prefHeight="530.0" prefWidth="720.0"
+      prefHeight="450.0" prefWidth="720.0"
       alignment="TOP_CENTER">
 
     <children>

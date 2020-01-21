@@ -3,6 +3,7 @@ package controller;
 import app.AppManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
@@ -14,6 +15,8 @@ import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
 import model.Tag;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.AlbumChange;
@@ -24,10 +27,9 @@ import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 public class EditPhotoDialogController {
 
@@ -63,6 +65,62 @@ public class EditPhotoDialogController {
     @FXML
     private void initialize() {
         this.session = AppManager.getSessionFactory().getCurrentSession();
+
+        TextFields.bindAutoCompletion(localizationTextField, t -> {
+            Set<String> localizations = new HashSet<>();
+            for(Album album : AppManager.getSessionUser().getAlbums()) {
+                for(Photo photo : album.getPhotoList()){
+                    if(photo.getLocalization().length() > 0) {
+                        localizations.add(photo.getLocalization());
+                    }
+                }
+            }
+            return localizations.stream().filter(elem ->
+            {
+                if(t.getUserText().length() > 0 && !elem.equalsIgnoreCase(t.getUserText())) {
+                    return elem.toLowerCase().startsWith(t.getUserText().toLowerCase());
+                }
+                return false;
+            }).collect(Collectors.toSet());
+        });
+
+
+        AtomicReference<String> currentTagsWithoutLastOne = new AtomicReference<>();
+        AutoCompletionBinding<String> tagsAutoCompletion = TextFields.bindAutoCompletion(tagsTextField, t -> {
+            String tagsString = TagParser.parseAsString(t.getUserText());
+            String lastTag;
+            if(tagsString.lastIndexOf(" ") != -1) {
+                currentTagsWithoutLastOne.set(tagsString.
+                        substring(0, tagsString.lastIndexOf(" ")) + " ");
+                lastTag = TagParser.parseAsStringGetLast(t.getUserText());
+            }
+            else {
+                currentTagsWithoutLastOne.set("");
+                lastTag = tagsString;
+            }
+
+            Set<String> tags = new HashSet<>();
+            for(Album album : AppManager.getSessionUser().getAlbums()) {
+                for(Photo photo : album.getPhotoList()){
+                    for(Tag tag : photo.getTags()) {
+                            tags.add(tag.getName());
+                    }
+                }
+            }
+
+            return tags.stream().filter(elem ->
+            {
+                if(t.getUserText().length() > 0 && !elem.equalsIgnoreCase(lastTag)) {
+                    return elem.toLowerCase().startsWith(lastTag.toLowerCase());
+                }
+                return false;
+            }).collect(Collectors.toSet());
+        });
+
+        tagsAutoCompletion.setOnAutoCompleted(e -> {
+            tagsTextField.setText(currentTagsWithoutLastOne + e.getCompletion() + " ");
+            tagsTextField.end();
+        });
     }
 
     public void setPhoto(Photo photo) {
@@ -73,7 +131,7 @@ public class EditPhotoDialogController {
             this.descriptionTextArea.setText(photo.getDescription());
         }
         if(photo.getDate() != null) {
-            this.dateTextField.setText((new SimpleDateFormat("yyyy-MM-dd")).format(photo.getDate()));
+                this.dateTextField.setText((new SimpleDateFormat("yyyy-MM-dd")).format(photo.getDate()));
         }
         if(photo.getLocalization() != null) {
             this.localizationTextField.setText(photo.getLocalization());
@@ -96,7 +154,12 @@ public class EditPhotoDialogController {
         photo.setDescription(descriptionTextArea.getText());
         photo.setLocalization(localizationTextField.getText());
         photo.setTags(TagParser.parse(tagsTextField.getText()));
-        photo.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(dateTextField.getText()));
+        try {
+            photo.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(dateTextField.getText()));
+        }
+        catch(ParseException e) {
+
+        }
 
         final Transaction tx = session.beginTransaction();
         session.update(photo);

@@ -27,7 +27,6 @@ public class EmailSender {
         properties.put("mail.smtp.host", SMTP_SERVER);
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.port", "587");
-
     }
 
     public void sendEmails(List<AlbumChange> albumChanges) {

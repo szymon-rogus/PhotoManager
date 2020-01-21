@@ -33,12 +33,12 @@
                 </TextField>
                 <Label text="Powtórz nowy email">
                     <GridPane.margin>
-                        <Insets bottom="100.0" left="5.0" right="5.0" top="120.0" />
+                        <Insets bottom="100.0" left="5.0" right="5.0" top="140.0" />
                     </GridPane.margin>
                 </Label>
                 <TextField fx:id="repeatEmailTextField" GridPane.columnIndex="1">
                     <GridPane.margin>
-                        <Insets bottom="100.0" left="5.0" right="5.0" top="120.0" />
+                        <Insets bottom="100.0" left="5.0" right="5.0" top="140.0" />
                     </GridPane.margin>
                 </TextField>
                 <Label fx:id="errorLabel">

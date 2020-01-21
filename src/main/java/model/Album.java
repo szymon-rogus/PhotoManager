@@ -69,21 +69,6 @@ public class Album {
 
     }
 
-    public List<Photo> getByTag(String tag) {
-        // TODO
-        return null;
-    }
-
-    public List<Photo> getByName(String name) {
-        // TODO
-        return null;
-    }
-
-    public List<Photo> getByDateInterval() {
-        // TODO
-        return null;
-    }
-
     public void addToAlbum(Photo photo) {
         photoList.add(photo);
     }

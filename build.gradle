@@ -19,5 +19,6 @@ dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
     compile group: 'com.h2database', name: 'h2', version: '1.4.197'
     compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.0'
+    compile group: 'org.controlsfx', name: 'controlsfx', version: '8.0.6'
 }
 

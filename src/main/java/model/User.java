@@ -45,6 +45,10 @@ public class User {
         albums.add(album);
     }
 
+    public void removeFromUser(Album album) {
+        albums.remove(album);
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }

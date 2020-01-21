@@ -71,6 +71,18 @@ public class AppController {
         primaryStage.show();
     }
 
+    public void showAllPhotoView() throws IOException {
+        final FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(AppManager.class.getResource("/view/AllPhotoView.fxml"));
+        final BorderPane allPhotoView = loader.load();
+
+        final AllPhotoViewController allPhotoViewController = loader.getController();
+        allPhotoViewController.setAppController(this);
+        final Scene scene = new Scene(allPhotoView);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
     public void showAlbumView() throws IOException {
         final FXMLLoader loader = new FXMLLoader();
         loader.setLocation(AppManager.class.getResource("/view/AlbumView.fxml"));

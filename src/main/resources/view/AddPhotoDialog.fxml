@@ -6,7 +6,7 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controller.AddPhotoDialogController"
-      maxHeight="500.0" prefWidth="300.0"
+      prefHeight="450.0" prefWidth="300.0"
       alignment="TOP_CENTER">
 
 
@@ -68,14 +68,14 @@
 
                 <Label text="Tagi">
                     <GridPane.margin>
-                        <Insets left="5.0" right="5.0" top="450.0"/>
+                        <Insets left="5.0" right="5.0" top="420.0"/>
                     </GridPane.margin>
                 </Label>
-                <TextArea fx:id="tagsTextArea" GridPane.columnIndex="1" maxHeight="60" wrapText="true">
+                <TextField fx:id="tagsTextField" GridPane.columnIndex="1" maxHeight="60">
                     <GridPane.margin>
-                        <Insets left="5.0" right="5.0" top="450.0"/>
+                        <Insets left="5.0" right="5.0" top="420.0"/>
                     </GridPane.margin>
-                </TextArea>
+                </TextField>
             </children>
         </GridPane>
 
