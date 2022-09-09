@@ -11,9 +11,9 @@ public class TagParser {
     public static List<Tag> parse(String tagsString) {
         List<String> tags = new ArrayList<>(Arrays.asList(tagsString.split("(?U)\\W+")));
         List<String> tagsUnique = new ArrayList<>();
-        for (int i = 0; i < tags.size(); i++) {
-            if (!(tagsUnique.contains(tags.get(i)))) {
-                tagsUnique.add(tags.get(i));
+        for (String s : tags) {
+            if (!(tagsUnique.contains(s))) {
+                tagsUnique.add(s);
             }
         }
         tags.clear();

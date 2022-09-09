@@ -48,45 +48,58 @@ public class LogInController {
     @FXML
     private Label errorLabel;
 
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
+
+    public void setAppController(AppController appController) {
+        this.appController = appController;
+    }
+
     @FXML
     private void initialize() {
-        this.errorLabel.setVisible(false);
-        this.errorLabel.setTextFill(Color.RED);
+        errorLabel.setVisible(false);
+        errorLabel.setTextFill(Color.RED);
+        logInButton.setDisable(true);
+
+        nameTextField.textProperty()
+                .addListener((observable, oldText, newText) -> setLogInButtonStatus(newText, passwordTextField));
+        passwordTextField.textProperty()
+                .addListener((observable, oldText, newText) -> setLogInButtonStatus(newText, nameTextField));
+    }
+
+    private void setLogInButtonStatus(String text, TextField otherTextField) {
+        logInButton.setDisable(text.trim().isEmpty() || otherTextField.getText().trim().isEmpty());
     }
 
     @FXML
     private void handleLogInAction() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
-        if (nameTextField.getText().isEmpty()) {
-            errorLabel.setText("Brak nazwy użytkownika!");
-            errorLabel.setVisible(true);
-            return;
-        }
-        if (passwordTextField.getText().isEmpty()) {
-            errorLabel.setText("Brak hasła!");
-            errorLabel.setVisible(true);
-            return;
-        }
         final Session session = AppManager.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();
-        final Query query = session.createQuery("SELECT u FROM User u WHERE u.name=:name", User.class);
+        final Query<User> query = session.createQuery("SELECT u FROM User u WHERE u.name=:name", User.class);
         query.setParameter("name", nameTextField.getText());
-        final User user = (User) query.uniqueResult();
+        final User user = query.uniqueResult();
         tx.commit();
         if (user == null) {
-            errorLabel.setText("Użytkownik nie istnieje!");
-            errorLabel.setVisible(true);
+            loginError();
             return;
         }
         final KeySpec spec = new PBEKeySpec(passwordTextField.getText().toCharArray(), user.getSalt(), 65536, 128);
         final SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         final byte[] hash = factory.generateSecret(spec).getEncoded();
         if (!Arrays.equals(hash, user.getPassword())) {
-            errorLabel.setText("Hasło niepoprawne!");
-            errorLabel.setVisible(true);
+            loginError();
             return;
         }
         AppManager.setSessionUser(user);
         appController.showAlbumView();
+    }
+
+    private void loginError() {
+        errorLabel.setText("Invalid login or password!");
+        errorLabel.setVisible(true);
+        nameTextField.setStyle("-fx-border-color: red;");
+        passwordTextField.setStyle("-fx-border-color: red;");
     }
 
     @FXML
@@ -97,13 +110,5 @@ public class LogInController {
     @FXML
     private void handleCreateAccountAction(ActionEvent event) throws IOException {
         appController.showCreateAccountDialog();
-    }
-
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-    }
-
-    public void setAppController(AppController appController) {
-        this.appController = appController;
     }
 }

@@ -21,6 +21,7 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @NoArgsConstructor
 public class CreateAccountController {
@@ -40,9 +41,6 @@ public class CreateAccountController {
     private TextField emailTextField;
 
     @FXML
-    private TextField repeatEmailTextField;
-
-    @FXML
     private Button cancelButton;
 
     @FXML
@@ -51,10 +49,26 @@ public class CreateAccountController {
     @FXML
     private Label errorLabel;
 
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
+
     @FXML
     private void initialize() {
         this.errorLabel.setVisible(false);
         this.errorLabel.setTextFill(Color.RED);
+
+        passwordTextField.textProperty().addListener((observable, oldValue, newValue) -> checkForPasswordsMatch(newValue, repeatPasswordTextField));
+        repeatPasswordTextField.textProperty().addListener((observable, oldValue, newValue) -> checkForPasswordsMatch(newValue, passwordTextField));
+    }
+
+    private void checkForPasswordsMatch(String value, PasswordField otherPasswordField) {
+        if (value.trim().isEmpty() && otherPasswordField.getText().trim().isEmpty()) {
+            repeatPasswordTextField.setStyle("-fx-border-color: transparent;");
+        } else {
+            repeatPasswordTextField.setStyle(Objects.equals(value, otherPasswordField.getText())
+                    ? "-fx-border-color: green" : "-fx-border-color: red");
+        }
     }
 
     @FXML
@@ -64,6 +78,7 @@ public class CreateAccountController {
 
     @FXML
     private void handleCreateAccountAction() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        resetBordersStyle();
         final boolean isValid = validate();
         if (isValid) {
             final SecureRandom random = new SecureRandom();
@@ -87,49 +102,48 @@ public class CreateAccountController {
         }
     }
 
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
+    private void resetBordersStyle() {
+        nameTextField.setStyle("-fx-border-color: transparent;");
+        passwordTextField.setStyle("-fx-border-color: transparent;");
+        repeatPasswordTextField.setStyle("-fx-border-color: transparent;");
+        emailTextField.setStyle("-fx-border-color: transparent;");
     }
 
     private boolean validate() {
         if (nameTextField.getText().isEmpty()) {
-            errorLabel.setText("Brak nazwy użytkownika!");
-            errorLabel.setVisible(true);
-            return false;
+            return showError("Missing login!", nameTextField);
         }
         if (passwordTextField.getText().isEmpty()) {
-            errorLabel.setText("Brak hasła!");
-            errorLabel.setVisible(true);
-            return false;
+            return showError("Missing password!", passwordTextField);
         }
         if (!passwordTextField.getText().equals(repeatPasswordTextField.getText())) {
-            errorLabel.setText("Powtórzone hasło się nie zgadza!");
-            errorLabel.setVisible(true);
-            return false;
+            return showError("Passwords mismatch!", repeatPasswordTextField);
         }
         if (!emailTextField.getText().isEmpty()) {
-            if (!emailTextField.getText().matches(".*@.*\\..*")) {
-                errorLabel.setText("Zły format emaila!");
-                errorLabel.setVisible(true);
-                return false;
-            }
-            if (!emailTextField.getText().equals(repeatEmailTextField.getText())) {
-                errorLabel.setText("Powtórzony email się nie zgadza!");
-                errorLabel.setVisible(true);
-                return false;
-            }
+            return showError("Missing mail!", emailTextField);
         }
+        if (!emailTextField.getText().matches(".*@.*\\..*")) {
+            return showError("Wrong mail format!", emailTextField);
+        }
+
+        return validateCorrectData();
+    }
+
+    private boolean showError(String errorMessage, TextField errorField) {
+        errorLabel.setText(errorMessage);
+        errorLabel.setVisible(true);
+        errorField.setStyle("-fx-border-color: red");
+        return false;
+    }
+
+    private boolean validateCorrectData() {
         final Session session = AppManager.getSessionFactory().getCurrentSession();
         final Transaction tx = session.beginTransaction();
-        final Query query = session.createQuery("SELECT u FROM User u WHERE u.name=:name", User.class);
+        final Query<User> query = session.createQuery("SELECT u FROM User u WHERE u.name=:name", User.class);
         query.setParameter("name", nameTextField.getText());
-        final User user = (User) query.uniqueResult();
+        final User user = query.uniqueResult();
         tx.commit();
-        if (user != null) {
-            errorLabel.setText("Użytkownik o podanej nazwie istnieje!");
-            errorLabel.setVisible(true);
-            return false;
-        }
-        return true;
+
+        return user == null || showError("Login already exists!", nameTextField);
     }
 }

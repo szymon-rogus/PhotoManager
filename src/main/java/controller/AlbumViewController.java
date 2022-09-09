@@ -4,17 +4,14 @@ import app.AppManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import lombok.NoArgsConstructor;
 import model.Album;
-import model.Photo;
 import model.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -69,17 +66,14 @@ public class AlbumViewController {
         creationDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
         modificationDateColumn.setCellValueFactory(new PropertyValueFactory<>("modificationDate"));
 
-        albumsTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                albumsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        albumsTable.setOnMouseClicked(event -> {
+            albumsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-                if(event.getClickCount() == 2){
-                    try {
-                        appController.showPhotoView(albumsTable.getSelectionModel().getSelectedItem());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            if(event.getClickCount() == 2){
+                try {
+                    appController.showPhotoView(albumsTable.getSelectionModel().getSelectedItem());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -94,10 +88,10 @@ public class AlbumViewController {
     }
 
     @FXML
-    private void handleDeleteAlbumAction(ActionEvent event) throws IOException {
+    private void handleDeleteAlbumAction(ActionEvent event) {
         if(albumsTable.getSelectionModel().getSelectedItem() != null) {
             JDialog.setDefaultLookAndFeelDecorated(true);
-            int response = JOptionPane.showConfirmDialog(null, "Jesteœ pewien?", "PotwierdŸ",
+            int response = JOptionPane.showConfirmDialog(null, "Jesteï¿½ pewien?", "Potwierdï¿½",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
                 session = AppManager.getSessionFactory().openSession();

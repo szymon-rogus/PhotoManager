@@ -123,12 +123,12 @@ public class AddPhotoDialogController {
     }
 
     @FXML
-    private void handleCancelAction(ActionEvent event) {
+    private void handleCancelAction() {
         dialogStage.close();
     }
 
     @FXML
-    private void handleOkAction(ActionEvent event) {
+    private void handleOkAction() {
         if (uploadedPhoto != null && album != null) {
             Photo photo;
 

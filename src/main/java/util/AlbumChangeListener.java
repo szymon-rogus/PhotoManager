@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 
 public class AlbumChangeListener {
 
-    private List<AlbumChange> albumChanges = new ArrayList<>();
+    private final List<AlbumChange> albumChanges = new ArrayList<>();
 
-    private EmailSender emailSender = new EmailSender();
+    private final EmailSender emailSender = new EmailSender();
 
     public void addAlbumChange(AlbumChange albumChange) {
         List<AlbumChange> matchingAlbumChanges = albumChanges.stream()
@@ -16,9 +16,11 @@ public class AlbumChangeListener {
                 .collect(Collectors.toList());
         if (matchingAlbumChanges.isEmpty()) {
             albumChanges.add(albumChange);
+            sendEmails();
             return;
         }
         matchingAlbumChanges.get(0).getPhotosChanged().addAll(albumChange.getPhotosChanged());
+        sendEmails();
     }
 
     public void sendEmails() {

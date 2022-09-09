@@ -10,9 +10,9 @@ import java.util.List;
 @Getter
 public class AlbumChange {
 
-    private Album album;
+    private final Album album;
 
-    private List<Photo> photosChanged = new ArrayList<>();
+    private final List<Photo> photosChanged = new ArrayList<>();
 
     public AlbumChange(Album album) {
         this.album = album;

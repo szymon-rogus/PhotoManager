@@ -6,9 +6,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import lombok.NoArgsConstructor;
@@ -16,9 +16,7 @@ import model.Album;
 import model.Photo;
 import model.Tag;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import util.TagParser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,7 +27,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @NoArgsConstructor
@@ -99,17 +96,14 @@ public class AllPhotoViewController {
             }
         });
 
-        photosTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                photosTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        photosTable.setOnMouseClicked(event -> {
+            photosTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-                if(event.getClickCount() == 2){
-                    try {
-                        appController.showPhotoDialog(photosTable.getSelectionModel().getSelectedItem());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            if(event.getClickCount() == 2){
+                try {
+                    appController.showPhotoDialog(photosTable.getSelectionModel().getSelectedItem());
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -118,7 +112,7 @@ public class AllPhotoViewController {
     }
 
     @FXML
-    private void showAll(ActionEvent event) throws IOException {
+    private void showAll(ActionEvent event) {
         reload();
     }
 
@@ -134,7 +128,7 @@ public class AllPhotoViewController {
     }
 
     @FXML
-    public void handleSortByTags(ActionEvent event) throws IOException {
+    public void handleSortByTags(ActionEvent event) {
         ObservableList<Tag> TagList = FXCollections.observableArrayList();
         final ObservableList<Photo> photoList = FXCollections.observableArrayList();
         this.session = AppManager.getSessionFactory().getCurrentSession();
@@ -145,7 +139,7 @@ public class AllPhotoViewController {
         }
 
         String mostCommonTag = TagList.stream()
-                .filter(it -> Objects.nonNull(it))
+                .filter(Objects::nonNull)
                 .collect(Collectors.groupingBy(Tag::getName, Collectors.counting()))
                 .entrySet().stream().max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey).orElse(null);
@@ -166,7 +160,7 @@ public class AllPhotoViewController {
     }
 
     @FXML
-    private void handleSearchNameAction(ActionEvent event) throws IOException {
+    private void handleSearchNameAction(ActionEvent event) {
         final ObservableList<Photo> photoList = FXCollections.observableArrayList();
         this.session = AppManager.getSessionFactory().getCurrentSession();
         final Transaction tx = session.beginTransaction();
@@ -182,7 +176,7 @@ public class AllPhotoViewController {
     }
 
     @FXML
-    private void handleSearchLocalizationAction(ActionEvent event) throws IOException {
+    private void handleSearchLocalizationAction(ActionEvent event) {
         final ObservableList<Photo> photoList = FXCollections.observableArrayList();
         this.session = AppManager.getSessionFactory().getCurrentSession();
         final Transaction tx = session.beginTransaction();
@@ -198,7 +192,7 @@ public class AllPhotoViewController {
     }
 
     @FXML
-    private void handleSearchTagsAction(ActionEvent event) throws IOException {
+    private void handleSearchTagsAction(ActionEvent event) {
         final ObservableList<Photo> photoList = FXCollections.observableArrayList();
         this.session = AppManager.getSessionFactory().getCurrentSession();
         final Transaction tx = session.beginTransaction();
