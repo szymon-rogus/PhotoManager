@@ -1,6 +1,6 @@
 # Created by https://www.gitignore.io/api/gradle
 # Edit at https://www.gitignore.io/?templates=gradle
-.idea
+/.idea/
 .idea/*
 out
 out/*
@@ -8,6 +8,7 @@ out/*
 .gradle
 .gradle/*
 build/
+/gradle/
 
 # Ignore Gradle GUI config
 gradle-app.setting
