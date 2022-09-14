@@ -1,12 +1,12 @@
 # Created by https://www.gitignore.io/api/gradle
 # Edit at https://www.gitignore.io/?templates=gradle
 /.idea/
-.idea/*
-out
-out/*
+/.idea/*
+/out
+/out/*
 ### Gradle ###
-.gradle
-.gradle/*
+/.gradle/
+/.gradle/*
 build/
 /gradle/
 
@@ -24,5 +24,3 @@ gradle-app.setting
 
 ### Gradle Patch ###
 **/build/
-
-# End of https://www.gitignore.io/api/gradle

@@ -58,8 +58,10 @@ public class CreateAccountController {
         this.errorLabel.setVisible(false);
         this.errorLabel.setTextFill(Color.RED);
 
-        passwordTextField.textProperty().addListener((observable, oldValue, newValue) -> checkForPasswordsMatch(newValue, repeatPasswordTextField));
-        repeatPasswordTextField.textProperty().addListener((observable, oldValue, newValue) -> checkForPasswordsMatch(newValue, passwordTextField));
+        passwordTextField.textProperty().addListener((observable, oldValue, newValue)
+                -> checkForPasswordsMatch(newValue, repeatPasswordTextField));
+        repeatPasswordTextField.textProperty().addListener((observable, oldValue, newValue)
+                -> checkForPasswordsMatch(newValue, passwordTextField));
     }
 
     private void checkForPasswordsMatch(String value, PasswordField otherPasswordField) {

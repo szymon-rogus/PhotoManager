@@ -75,7 +75,7 @@ public class LogInController {
     @FXML
     private void handleLogInAction() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
         final Session session = AppManager.getSessionFactory().getCurrentSession();
-        Transaction tx = session.beginTransaction();
+        final Transaction tx = session.beginTransaction();
         final Query<User> query = session.createQuery("SELECT u FROM User u WHERE u.name=:name", User.class);
         query.setParameter("name", nameTextField.getText());
         final User user = query.uniqueResult();
