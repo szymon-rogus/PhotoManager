@@ -1,18 +1,17 @@
-package controller;
+package controller.validation;
 
 import app.AppManager;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 import lombok.NoArgsConstructor;
 import model.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -24,15 +23,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 @NoArgsConstructor
-public class CreateAccountController {
-
-    private Stage dialogStage;
-
-    @FXML
-    private TextField nameTextField;
-
-    @FXML
-    private PasswordField passwordTextField;
+public class CreateAccountController extends AbstractValidationController {
 
     @FXML
     private PasswordField repeatPasswordTextField;
@@ -46,30 +37,36 @@ public class CreateAccountController {
     @FXML
     private Button createAccountButton;
 
-    @FXML
-    private Label errorLabel;
-
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
 
     @FXML
-    private void initialize() {
-        this.errorLabel.setVisible(false);
-        this.errorLabel.setTextFill(Color.RED);
+    @Override
+    protected void initialize() {
+        super.initialize();
+        repeatPasswordTextField.setTextFormatter(new TextFormatter<>(validationOperator));
+        emailTextField.setTextFormatter(new TextFormatter<>(validationOperator));
 
         passwordTextField.textProperty().addListener((observable, oldValue, newValue)
-                -> checkForPasswordsMatch(newValue, repeatPasswordTextField));
+                -> checkForPasswordsMatch(newValue, repeatPasswordTextField.getText()));
         repeatPasswordTextField.textProperty().addListener((observable, oldValue, newValue)
-                -> checkForPasswordsMatch(newValue, passwordTextField));
+                -> checkForPasswordsMatch(newValue, passwordTextField.getText()));
+
+        createAccountButton.disableProperty()
+                .bind(Bindings.notEqual(passwordTextField.textProperty(), repeatPasswordTextField.textProperty())
+                        .or(nameTextField.textProperty().isEmpty())
+                        .or(passwordTextField.textProperty().isEmpty())
+                        .or(repeatPasswordTextField.textProperty().isEmpty())
+                        .or(emailTextField.textProperty().isEmpty()));
     }
 
-    private void checkForPasswordsMatch(String value, PasswordField otherPasswordField) {
-        if (value.trim().isEmpty() && otherPasswordField.getText().trim().isEmpty()) {
+    private void checkForPasswordsMatch(String password, String repeatedPassword) {
+        if (password.trim().isEmpty() && repeatedPassword.trim().isEmpty()) {
             repeatPasswordTextField.setStyle("-fx-border-color: transparent;");
         } else {
-            repeatPasswordTextField.setStyle(Objects.equals(value, otherPasswordField.getText())
-                    ? "-fx-border-color: green" : "-fx-border-color: red");
+            repeatPasswordTextField.setStyle(Objects.equals(password, repeatedPassword)
+                    ? "-fx-border-color: green": "-fx-border-color: red");
         }
     }
 
@@ -112,18 +109,6 @@ public class CreateAccountController {
     }
 
     private boolean validate() {
-        if (nameTextField.getText().isEmpty()) {
-            return showError("Missing login!", nameTextField);
-        }
-        if (passwordTextField.getText().isEmpty()) {
-            return showError("Missing password!", passwordTextField);
-        }
-        if (!passwordTextField.getText().equals(repeatPasswordTextField.getText())) {
-            return showError("Passwords mismatch!", repeatPasswordTextField);
-        }
-        if (!emailTextField.getText().isEmpty()) {
-            return showError("Missing mail!", emailTextField);
-        }
         if (!emailTextField.getText().matches(".*@.*\\..*")) {
             return showError("Wrong mail format!", emailTextField);
         }
@@ -139,13 +124,7 @@ public class CreateAccountController {
     }
 
     private boolean validateCorrectData() {
-        final Session session = AppManager.getSessionFactory().getCurrentSession();
-        final Transaction tx = session.beginTransaction();
-        final Query<User> query = session.createQuery("SELECT u FROM User u WHERE u.name=:name", User.class);
-        query.setParameter("name", nameTextField.getText());
-        final User user = query.uniqueResult();
-        tx.commit();
-
+        final User user = getUserFromData();
         return user == null || showError("Login already exists!", nameTextField);
     }
 }

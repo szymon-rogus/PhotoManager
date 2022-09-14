@@ -18,7 +18,6 @@ import org.hibernate.Transaction;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -27,8 +26,6 @@ import java.util.List;
 public class AlbumViewController {
 
     private AppController appController;
-
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm");
 
     private Session session;
 
@@ -91,7 +88,7 @@ public class AlbumViewController {
     private void handleDeleteAlbumAction(ActionEvent event) {
         if(albumsTable.getSelectionModel().getSelectedItem() != null) {
             JDialog.setDefaultLookAndFeelDecorated(true);
-            int response = JOptionPane.showConfirmDialog(null, "Jeste� pewien?", "Potwierd�",
+            int response = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
                 session = AppManager.getSessionFactory().openSession();

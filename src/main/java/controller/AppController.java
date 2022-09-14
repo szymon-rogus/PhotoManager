@@ -1,6 +1,8 @@
 package controller;
 
 import app.AppManager;
+import controller.validation.CreateAccountController;
+import controller.validation.LogInController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;

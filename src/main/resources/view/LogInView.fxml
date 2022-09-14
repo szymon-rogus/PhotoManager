@@ -11,62 +11,61 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="152.0" prefWidth="400.0" style="-fx-background-color: lightBlue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LogInController">
+<BorderPane prefHeight="152.0" prefWidth="400.0" style="-fx-background-color: lightBlue;"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.validation.LogInController">
     <top>
         <GridPane hgap="5.0" prefHeight="65.0" prefWidth="400.0" vgap="5.0" BorderPane.alignment="CENTER">
             <columnConstraints>
-                <ColumnConstraints maxWidth="85.0" minWidth="50.0" prefWidth="77.0" />
-                <ColumnConstraints hgrow="ALWAYS" maxWidth="345.0" minWidth="10.0" prefWidth="298.0" />
+                <ColumnConstraints maxWidth="85.0" minWidth="50.0" prefWidth="77.0"/>
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="345.0" minWidth="10.0" prefWidth="298.0"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" />
+                <RowConstraints minHeight="10.0"/>
             </rowConstraints>
-            <children>
-                <Label text="Login">
-                    <GridPane.margin>
-                        <Insets bottom="100.0" left="5.0" right="5.0" top="50.0" />
-                    </GridPane.margin>
-                </Label>
-                <TextField fx:id="nameTextField" prefHeight="35.0" prefWidth="292.0" GridPane.columnIndex="1">
-                    <GridPane.margin>
-                        <Insets bottom="100.0" left="5.0" right="5.0" top="50.0" />
-                    </GridPane.margin>
-                </TextField>
-                <Label text="Password">
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="30.0" />
-                    </GridPane.margin>
-                </Label>
-                <PasswordField fx:id="passwordTextField" GridPane.columnIndex="1">
-                    <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="30.0" />
-                    </GridPane.margin>
-                </PasswordField>
-            </children>
             <padding>
-                <Insets left="10.0" right="10.0" top="5.0" />
+                <Insets left="10.0" right="10.0" top="5.0"/>
             </padding>
-         <BorderPane.margin>
-            <Insets top="20.0" />
-         </BorderPane.margin>
+            <BorderPane.margin>
+                <Insets top="20.0"/>
+            </BorderPane.margin>
+            <Label text="Login">
+                <GridPane.margin>
+                    <Insets bottom="100.0" left="5.0" right="5.0" top="50.0"/>
+                </GridPane.margin>
+            </Label>
+            <TextField fx:id="nameTextField" prefHeight="35.0" prefWidth="292.0" GridPane.columnIndex="1">
+                <GridPane.margin>
+                    <Insets bottom="100.0" left="5.0" right="5.0" top="50.0"/>
+                </GridPane.margin>
+            </TextField>
+            <Label text="Password">
+                <GridPane.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="30.0"/>
+                </GridPane.margin>
+            </Label>
+            <PasswordField fx:id="passwordTextField" GridPane.columnIndex="1">
+                <GridPane.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="30.0"/>
+                </GridPane.margin>
+            </PasswordField>
         </GridPane>
     </top>
     <center>
         <GridPane>
-            <HBox alignment="BOTTOM_LEFT" fillHeight="false" prefHeight="25.0" prefWidth="392.0" spacing="5.0" BorderPane.alignment="CENTER_RIGHT">
-                <children>
-                    <Label fx:id="errorLabel" prefHeight="16.0" prefWidth="285.0">
-                        <GridPane.margin>
-                            <Insets bottom="-150.0" left="5.0" right="5.0" top="150.0" />
-                        </GridPane.margin>
-                  <HBox.margin>
-                     <Insets left="100.0" />
-                  </HBox.margin>
-                    </Label>
-                </children>
+            <HBox alignment="BOTTOM_LEFT" fillHeight="false" prefHeight="25.0" prefWidth="392.0" spacing="5.0"
+                  BorderPane.alignment="CENTER_RIGHT">
                 <BorderPane.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                 </BorderPane.margin>
+                <Label fx:id="errorLabel" prefHeight="16.0" prefWidth="285.0">
+                    <GridPane.margin>
+                        <Insets bottom="-150.0" left="5.0" right="5.0" top="150.0"/>
+                    </GridPane.margin>
+                    <HBox.margin>
+                        <Insets left="100.0"/>
+                    </HBox.margin>
+                </Label>
             </HBox>
          <columnConstraints>
             <ColumnConstraints />
@@ -78,26 +77,27 @@
     </center>
     <bottom>
         <HBox alignment="BOTTOM_LEFT" prefHeight="34.0" prefWidth="398.0" spacing="5.0" BorderPane.alignment="CENTER">
-            <children>
-                <Button fx:id="logInButton" mnemonicParsing="false" onAction="#handleLogInAction" prefHeight="25.0" prefWidth="100.0" text="Log in">
-                    <HBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                    </HBox.margin>
-                </Button>
-                <Button fx:id="createAccountButton" mnemonicParsing="false" onAction="#handleCreateAccountAction" prefHeight="25.0" prefWidth="120.0" text="Create account">
-                    <HBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                    </HBox.margin>
-                </Button>
-                <Button fx:id="exitButton" mnemonicParsing="false" onAction="#handleExitAction" prefHeight="25.0" prefWidth="100.0" text="Exit">
-                    <HBox.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                    </HBox.margin>
-                </Button>
-            </children>
             <BorderPane.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
             </BorderPane.margin>
+            <Button fx:id="logInButton" mnemonicParsing="false" onAction="#handleLogInAction" prefHeight="25.0"
+                    prefWidth="100.0" text="Log in">
+                <HBox.margin>
+                    <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="createAccountButton" mnemonicParsing="false" onAction="#handleCreateAccountAction"
+                    prefHeight="25.0" prefWidth="120.0" text="Create account">
+                <HBox.margin>
+                    <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#handleExitAction" prefHeight="25.0"
+                    prefWidth="100.0" text="Exit">
+                <HBox.margin>
+                    <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                </HBox.margin>
+            </Button>
         </HBox>
     </bottom>
     <opaqueInsets>
