@@ -1,11 +1,10 @@
-package controller;
+package controller.mainView;
 
 import app.AppManager;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
@@ -20,20 +19,12 @@ import java.util.stream.Collectors;
 
 
 @NoArgsConstructor
-public class CreateAlbumDialogController {
-
-    private Stage dialogStage;
+public class CreateAlbumDialogController extends AbstractChangeDialog {
 
     private Session session;
 
     @FXML
     private TextField nameTextField;
-
-    @FXML
-    private Button cancelButton;
-
-    @FXML
-    private Button okButton;
 
     private List<String> albumNames;
 
@@ -61,16 +52,11 @@ public class CreateAlbumDialogController {
     }
 
     @FXML
-    private void handleOkAction(ActionEvent event) {
+    protected void handleOkAction(ActionEvent event) {
         final Album album = new Album(nameTextField.getText());
         final Transaction tx = session.beginTransaction();
         session.save(album);
         tx.commit();
-        dialogStage.close();
-    }
-
-    @FXML
-    private void handleCancelAction(ActionEvent event) {
         dialogStage.close();
     }
 }

@@ -1,6 +1,7 @@
-package controller;
+package controller.mainView;
 
 import app.AppManager;
+import controller.AppController;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

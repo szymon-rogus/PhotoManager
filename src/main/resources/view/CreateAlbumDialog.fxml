@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="94.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.CreateAlbumDialogController">
+<BorderPane prefHeight="100.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainView.CreateAlbumDialogController">
     <center>
         <GridPane hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -40,20 +39,18 @@
         </GridPane>
     </center>
     <bottom>
-        <HBox alignment="BOTTOM_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+        <HBox alignment="BOTTOM_CENTER" prefHeight="42.0" prefWidth="290.0" spacing="5.0" BorderPane.alignment="CENTER">
             <BorderPane.margin>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </BorderPane.margin>
-            <Button fx:id="okButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleOkAction"
-                    prefHeight="24.0" prefWidth="85.0" text="Create">
+            <Button fx:id="okButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleOkAction" prefHeight="25.0" prefWidth="90.0" text="Create">
                 <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="60.0" top="5.0" />
+                    <Insets bottom="5.0" left="10.0" right="50.0" top="5.0" />
                 </HBox.margin>
             </Button>
-            <Button fx:id="cancelButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleCancelAction"
-                    prefHeight="24.0" prefWidth="85.0" text="Cancel">
+            <Button fx:id="cancelButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="25.0" prefWidth="90.0" text="Cancel">
                 <HBox.margin>
-                    <Insets bottom="5.0" left="60.0" right="5.0" top="5.0" />
+                    <Insets bottom="5.0" left="50.0" right="10.0" top="5.0" />
                 </HBox.margin>
             </Button>
         </HBox>

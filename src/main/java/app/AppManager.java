@@ -2,6 +2,7 @@ package app;
 
 import controller.AppController;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.User;
 import org.hibernate.Session;
@@ -10,6 +11,7 @@ import org.hibernate.cfg.Configuration;
 import util.AlbumChangeListener;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class AppManager extends Application {
 
@@ -24,6 +26,7 @@ public class AppManager extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setOnCloseRequest(e -> handleExit());
+        primaryStage.getIcons().add(new Image(ClassLoader.getSystemResourceAsStream("icons/photo.png")));
         this.appController = new AppController(primaryStage);
         this.appController.initRootLayout();
         albumChangeListener = new AlbumChangeListener();

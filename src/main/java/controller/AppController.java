@@ -1,6 +1,9 @@
 package controller;
 
 import app.AppManager;
+import controller.mainView.AlbumViewController;
+import controller.mainView.ChangeEmailDialogController;
+import controller.mainView.CreateAlbumDialogController;
 import controller.validation.CreateAccountController;
 import controller.validation.LogInController;
 import javafx.fxml.FXMLLoader;
@@ -55,6 +58,7 @@ public class AppController {
 
         primaryScene = new Scene(rootLayout);
         primaryStage.setScene(primaryScene);
+        primaryStage.setResizable(false);
         logInController.setDialogStage(primaryStage);
         primaryStage.show();
     }
