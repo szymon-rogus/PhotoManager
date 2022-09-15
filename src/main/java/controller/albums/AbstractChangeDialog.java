@@ -1,4 +1,4 @@
-package controller.mainView;
+package controller.albums;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +14,10 @@ public abstract class AbstractChangeDialog {
 
     @FXML
     protected Button cancelButton;
+
+    public void setDialogStage(Stage stage) {
+        this.dialogStage = stage;
+    }
 
     @FXML
     protected void handleCancelAction(ActionEvent event) {

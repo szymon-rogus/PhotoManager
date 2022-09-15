@@ -1,4 +1,4 @@
-package controller.mainView;
+package controller.albums;
 
 import app.AppManager;
 import javafx.beans.binding.Bindings;
@@ -6,25 +6,23 @@ import javafx.beans.value.ObservableBooleanValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.control.TextFormatter;
 import lombok.NoArgsConstructor;
 import model.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import util.Common;
 
 
 @NoArgsConstructor
-public class ChangeEmailDialogController extends AbstractChangeDialog {
+public class ChangeEmailDialog extends AbstractChangeDialog {
 
     @FXML
     private TextField emailTextField;
 
-    public void setDialogStage(Stage stage) {
-        this.dialogStage = stage;
-    }
-
     @FXML
     private void initialize() {
+        emailTextField.setTextFormatter(new TextFormatter<>(Common.validationOperator));
         okButton.disableProperty().bind(wrongMailFormat());
     }
 

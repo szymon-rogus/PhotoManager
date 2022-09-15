@@ -3,10 +3,7 @@ package model;
 import app.AppManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -20,6 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "ALBUM")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Album {

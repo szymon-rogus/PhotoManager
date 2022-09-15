@@ -1,9 +1,10 @@
 package controller;
 
 import app.AppManager;
-import controller.mainView.AlbumViewController;
-import controller.mainView.ChangeEmailDialogController;
-import controller.mainView.CreateAlbumDialogController;
+import controller.albums.AlbumViewController;
+import controller.albums.ChangeAlbumNameDialog;
+import controller.albums.ChangeEmailDialog;
+import controller.albums.CreateAlbumDialog;
 import controller.validation.CreateAccountController;
 import controller.validation.LogInController;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,8 @@ public class AppController {
     private static final String TITLE = "PhotoManager";
 
     private static final String CREATE_ALBUM_DIALOG_TITLE = "Create album";
+
+    private static final String CHANE_ALBUM_NAME_TITLE = "Rename album";
 
     private static final String ADD_PHOTO_DIALOG_TITLE = "Add new photo";
 
@@ -77,18 +80,6 @@ public class AppController {
         primaryStage.show();
     }
 
-    public void showAllPhotoView() throws IOException {
-        final FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(AppManager.class.getResource("/view/AllPhotoView.fxml"));
-        final BorderPane allPhotoView = loader.load();
-
-        final AllPhotoViewController allPhotoViewController = loader.getController();
-        allPhotoViewController.setAppController(this);
-        final Scene scene = new Scene(allPhotoView);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
     public void showAlbumView() throws IOException {
         final FXMLLoader loader = new FXMLLoader();
         loader.setLocation(AppManager.class.getResource("/view/AlbumView.fxml"));
@@ -115,8 +106,28 @@ public class AppController {
         final Scene scene = new Scene(page);
         dialogStage.setScene(scene);
 
-        final CreateAlbumDialogController controller = loader.getController();
+        final CreateAlbumDialog controller = loader.getController();
         controller.setDialogStage(dialogStage);
+
+        dialogStage.setResizable(false);
+        dialogStage.showAndWait();
+    }
+
+    public void showRenameAlbumDialog(String oldName) throws IOException {
+        final FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(app.AppManager.class.getResource("/view/ChangeAlbumNameDialog.fxml"));
+        final BorderPane page = loader.load();
+
+        final Stage dialogStage = new Stage();
+        dialogStage.setTitle(CHANE_ALBUM_NAME_TITLE);
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        final Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+
+        final ChangeAlbumNameDialog controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setOldName(oldName);
 
         dialogStage.setResizable(false);
         dialogStage.showAndWait();
@@ -214,7 +225,7 @@ public class AppController {
         final Scene scene = new Scene(page);
         dialogStage.setScene(scene);
 
-        final ChangeEmailDialogController controller = loader.getController();
+        final ChangeEmailDialog controller = loader.getController();
         controller.setDialogStage(dialogStage);
 
         dialogStage.setResizable(false);

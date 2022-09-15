@@ -2,6 +2,7 @@ package app;
 
 import controller.AppController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.User;
@@ -11,7 +12,6 @@ import org.hibernate.cfg.Configuration;
 import util.AlbumChangeListener;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class AppManager extends Application {
 
@@ -69,5 +69,10 @@ public class AppManager extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void exit() {
+        Platform.exit();
+        System.exit(0);
     }
 }

@@ -1,4 +1,4 @@
-package controller.mainView;
+package controller.albums;
 
 import app.AppManager;
 import javafx.beans.binding.Bindings;
@@ -19,9 +19,7 @@ import java.util.stream.Collectors;
 
 
 @NoArgsConstructor
-public class CreateAlbumDialogController extends AbstractChangeDialog {
-
-    private Session session;
+public class CreateAlbumDialog extends AbstractChangeDialog {
 
     @FXML
     private TextField nameTextField;
@@ -34,7 +32,6 @@ public class CreateAlbumDialogController extends AbstractChangeDialog {
 
     @FXML
     private void initialize() {
-        this.session = AppManager.getSessionFactory().getCurrentSession();
         getAlbumNamesTaken();
         nameTextField.setTextFormatter(new TextFormatter<>(Common.validationOperator));
         okButton.disableProperty().bind(Bindings.isEmpty(nameTextField.textProperty()).or(albumNameExists()));
@@ -53,10 +50,12 @@ public class CreateAlbumDialogController extends AbstractChangeDialog {
 
     @FXML
     protected void handleOkAction(ActionEvent event) {
+        Session session = AppManager.getSessionFactory().getCurrentSession();
         final Album album = new Album(nameTextField.getText());
         final Transaction tx = session.beginTransaction();
         session.save(album);
         tx.commit();
+        session.close();
         dialogStage.close();
     }
 }

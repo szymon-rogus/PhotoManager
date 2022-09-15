@@ -6,7 +6,9 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name = "USERS")
@@ -47,6 +49,12 @@ public class User {
 
     public void removeFromUser(Album album) {
         albums.remove(album);
+    }
+
+    public void renameAlbum(String oldName, String newName) {
+        albums.stream()
+                .filter(el -> el.getName().equals(oldName))
+                .forEach(el -> el.setName(newName));
     }
 
     public void setEmail(String email) {

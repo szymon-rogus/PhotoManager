@@ -1,13 +1,14 @@
-package controller.mainView;
+package controller.albums;
 
 import app.AppManager;
 import controller.AppController;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -19,6 +20,7 @@ import model.Album;
 import model.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import util.Common;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -30,8 +32,6 @@ import java.util.List;
 public class AlbumViewController {
 
     private AppController appController;
-
-    private Session session;
 
     @FXML
     private TableView<Album> albumsTable;
@@ -46,19 +46,22 @@ public class AlbumViewController {
     private TableColumn<Album, Date> modificationDateColumn;
 
     @FXML
-    private Button createAlbumButton;
+    private MenuItem createAlbumButton;
 
     @FXML
-    private Button deleteAlbumButton;
+    private MenuItem renameAlbumButton;
 
     @FXML
-    private Button allPhotoViewButton;
+    private MenuItem deleteAlbumButton;
 
     @FXML
-    private Button changeEmailButton;
+    private MenuItem changeEmailButton;
 
     @FXML
-    private Button logoutButton;
+    private MenuItem logoutButton;
+
+    @FXML
+    private MenuItem exitButton;
 
     public void setAppController(AppController appController) {
         this.appController = appController;
@@ -66,11 +69,12 @@ public class AlbumViewController {
 
     @FXML
     private void initialize() {
-        this.session = AppManager.getSessionFactory().getCurrentSession();
         setColumnsName();
+        setIcons();
         albumsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         albumsTable.setOnMouseClicked(this::openAlbum);
         deleteAlbumButton.disableProperty().bind(Bindings.isEmpty(albumsTable.getSelectionModel().getSelectedItems()));
+        renameAlbumButton.disableProperty().bind(anyOrManySelection());
 
         reload();
         albumsTable.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
@@ -86,6 +90,13 @@ public class AlbumViewController {
         modificationDateColumn.setCellValueFactory(new PropertyValueFactory<>("modificationDate"));
     }
 
+    private void setIcons() {
+        Common.setIconForElement(createAlbumButton, "icons/add.png");
+        Common.setIconForElement(deleteAlbumButton, "icons/remove.png");
+        Common.setIconForElement(changeEmailButton, "icons/emailChange.png");
+        Common.setIconForElement(renameAlbumButton, "icons/rename.png");
+    }
+
     private void openAlbum(MouseEvent event) {
         if(event.getClickCount() == 2){
             try {
@@ -96,8 +107,14 @@ public class AlbumViewController {
         }
     }
 
+    private ObservableBooleanValue anyOrManySelection() {
+        return Bindings.createBooleanBinding(() -> albumsTable.getSelectionModel().getSelectedItems().size() != 1,
+                albumsTable.getSelectionModel().getSelectedItems());
+    }
+
     private void reload() {
         albumsTable.setItems(getAlbums());
+        albumsTable.refresh();
     }
 
     public static ObservableList<Album> getAlbums() {
@@ -114,17 +131,28 @@ public class AlbumViewController {
     }
 
     @FXML
+    private void handleRenameAlbumAction(ActionEvent event) throws IOException {
+        String oldName = albumsTable.getSelectionModel().getSelectedItems().stream()
+                .findFirst()
+                .map(Album::getName)
+                .get();
+        appController.showRenameAlbumDialog(oldName);
+        reload();
+    }
+
+    @FXML
     private void handleDeleteAlbumAction(ActionEvent event) {
         int response = getRemoveConfirmation();
         if (response == JOptionPane.NO_OPTION) {
             return;
         }
-        session = AppManager.getSessionFactory().openSession();
-        removeAlbums(albumsTable.getSelectionModel().getSelectedItems());
+        Session session = AppManager.getSessionFactory().openSession();
+        removeAlbums(albumsTable.getSelectionModel().getSelectedItems(), session);
 
         Transaction tx = session.beginTransaction();
         session.update(AppManager.getSessionUser());
         tx.commit();
+        session.close();
         reload();
     }
 
@@ -134,18 +162,13 @@ public class AlbumViewController {
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
     }
 
-    private void removeAlbums(List<Album> albumsToRemove) {
+    private void removeAlbums(List<Album> albumsToRemove, Session session) {
         for (Album album : albumsToRemove) {
             for (User user : album.getUsers()) {
                 user.removeFromUser(album);
             }
             session.remove(album);
         }
-    }
-
-    @FXML
-    private void handleAllPhotoViewAction(ActionEvent event) throws IOException {
-        appController.showAllPhotoView();
     }
 
     @FXML
@@ -156,5 +179,10 @@ public class AlbumViewController {
     @FXML
     private void handleLogout(ActionEvent event) throws IOException {
         appController.initRootLayout();
+    }
+
+    @FXML
+    private void handleExit() {
+        AppManager.exit();
     }
 }
