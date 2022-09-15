@@ -1,6 +1,7 @@
 package controller;
 
 import app.AppManager;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +11,8 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import lombok.NoArgsConstructor;
 import model.Album;
 import model.User;
@@ -56,26 +59,51 @@ public class AlbumViewController {
     @FXML
     private Button logoutButton;
 
+    public void setAppController(AppController appController) {
+        this.appController = appController;
+    }
+
     @FXML
     private void initialize() {
         this.session = AppManager.getSessionFactory().getCurrentSession();
+        setColumnsName();
+        albumsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        albumsTable.setOnMouseClicked(this::openAlbum);
+        deleteAlbumButton.disableProperty().bind(Bindings.isEmpty(albumsTable.getSelectionModel().getSelectedItems()));
+
+        reload();
+        albumsTable.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+            if (e.getButton() == MouseButton.SECONDARY) {
+                albumsTable.getSelectionModel().clearSelection();
+            }
+        });
+    }
+
+    private void setColumnsName() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         creationDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
         modificationDateColumn.setCellValueFactory(new PropertyValueFactory<>("modificationDate"));
+    }
 
-        albumsTable.setOnMouseClicked(event -> {
-            albumsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-            if(event.getClickCount() == 2){
-                try {
-                    appController.showPhotoView(albumsTable.getSelectionModel().getSelectedItem());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+    private void openAlbum(MouseEvent event) {
+        if(event.getClickCount() == 2){
+            try {
+                appController.showPhotoView(albumsTable.getSelectionModel().getSelectedItem());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
+        }
+    }
 
-        reload();
+    private void reload() {
+        albumsTable.setItems(getAlbums());
+    }
+
+    public static ObservableList<Album> getAlbums() {
+        final ObservableList<Album> albumList = FXCollections.observableArrayList();
+        albumList.addAll(AppManager.getSessionUser().getAlbums());
+
+        return albumList;
     }
 
     @FXML
@@ -86,25 +114,31 @@ public class AlbumViewController {
 
     @FXML
     private void handleDeleteAlbumAction(ActionEvent event) {
-        if(albumsTable.getSelectionModel().getSelectedItem() != null) {
-            JDialog.setDefaultLookAndFeelDecorated(true);
-            int response = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (response == JOptionPane.YES_OPTION) {
-                session = AppManager.getSessionFactory().openSession();
-                List<Album> albumsToRemove = albumsTable.getSelectionModel().getSelectedItems();
-                for (Album album : albumsToRemove) {
-                    for (User user : album.getUsers()) {
-                        user.removeFromUser(album);
-                    }
-                    session.remove(album);
-                }
+        int response = getRemoveConfirmation();
+        if (response == JOptionPane.NO_OPTION) {
+            return;
+        }
+        session = AppManager.getSessionFactory().openSession();
+        removeAlbums(albumsTable.getSelectionModel().getSelectedItems());
 
-                Transaction tx = session.beginTransaction();
-                session.update(AppManager.getSessionUser());
-                tx.commit();
-                reload();
+        Transaction tx = session.beginTransaction();
+        session.update(AppManager.getSessionUser());
+        tx.commit();
+        reload();
+    }
+
+    private int getRemoveConfirmation() {
+        return JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to remove this album?", "Remove album",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+    }
+
+    private void removeAlbums(List<Album> albumsToRemove) {
+        for (Album album : albumsToRemove) {
+            for (User user : album.getUsers()) {
+                user.removeFromUser(album);
             }
+            session.remove(album);
         }
     }
 
@@ -121,20 +155,5 @@ public class AlbumViewController {
     @FXML
     private void handleLogout(ActionEvent event) throws IOException {
         appController.initRootLayout();
-    }
-
-    public void reload() {
-        albumsTable.setItems(getAllAlbums());
-    }
-
-    public void setAppController(AppController appController) {
-        this.appController = appController;
-    }
-
-    public ObservableList<Album> getAllAlbums() {
-        final ObservableList<Album> albumList = FXCollections.observableArrayList();
-        albumList.addAll(AppManager.getSessionUser().getAlbums());
-
-        return albumList;
     }
 }

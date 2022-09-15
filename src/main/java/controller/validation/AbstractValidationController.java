@@ -12,8 +12,7 @@ import model.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-
-import java.util.function.UnaryOperator;
+import util.Common;
 
 public abstract class AbstractValidationController {
 
@@ -28,19 +27,12 @@ public abstract class AbstractValidationController {
     @FXML
     protected Label errorLabel;
 
-    protected UnaryOperator<TextFormatter.Change> validationOperator = change -> {
-        if (change.getText().equals(" ")) {
-            change.setText("");
-        }
-        return change;
-    };
-
     @FXML
     protected void initialize() {
         errorLabel.setVisible(false);
         errorLabel.setTextFill(Color.RED);
-        nameTextField.setTextFormatter(new TextFormatter<>(validationOperator));
-        passwordTextField.setTextFormatter(new TextFormatter<>(validationOperator));
+        nameTextField.setTextFormatter(new TextFormatter<>(Common.validationOperator));
+        passwordTextField.setTextFormatter(new TextFormatter<>(Common.validationOperator));
     }
 
     protected User getUserFromData() {

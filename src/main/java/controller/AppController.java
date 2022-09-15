@@ -21,19 +21,19 @@ public class AppController {
 
     private static final String TITLE = "PhotoManager";
 
-    private static final String CREATE_ALBUM_DIALOG_TITLE = "Stwórz album";
+    private static final String CREATE_ALBUM_DIALOG_TITLE = "Create album";
 
-    private static final String ADD_PHOTO_DIALOG_TITLE = "Dodaj zdjęcie";
+    private static final String ADD_PHOTO_DIALOG_TITLE = "Add new photo";
 
-    private static final String EDIT_PHOTO_DIALOG_TITLE = "Dodaj zdjęcie";
+    private static final String EDIT_PHOTO_DIALOG_TITLE = "Edit photo data";
 
-    private static final String CREATE_ACCOUNT_DIALOG_TITLE = "Stwórz konto";
+    private static final String CREATE_ACCOUNT_DIALOG_TITLE = "Create new account";
 
-    private static final String CHANGE_EMAIL_DIALOG_TITLE = "Zmień email";
+    private static final String CHANGE_EMAIL_DIALOG_TITLE = "Change email";
 
-    private static final String SHARE_ALBUM_DIALOG_TITLE = "Udostępnij album";
+    private static final String SHARE_ALBUM_DIALOG_TITLE = "Share an album";
 
-    private static final String SEND_EMAILS_VIEW_TITLE = "Wysyłanie emaili...";
+    private static final String SEND_EMAILS_VIEW_TITLE = "Sending emails...";
 
     private Stage primaryStage;
 
@@ -95,6 +95,7 @@ public class AppController {
 
         final Scene scene = new Scene(albumView);
         primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
         primaryStage.show();
     }
 

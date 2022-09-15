@@ -12,9 +12,9 @@
     <center>
         <TableView BorderPane.alignment="CENTER" fx:id="albumsTable">
             <columns>
-                <TableColumn prefWidth="${albumsTable.width/3}" text="Nazwa" fx:id="nameColumn"/>
-                <TableColumn prefWidth="${albumsTable.width/3}" text="Data stworzenia" fx:id="creationDateColumn"/>
-                <TableColumn prefWidth="${albumsTable.width/3}" text="Data modyfikacji" fx:id="modificationDateColumn"/>
+                <TableColumn prefWidth="${albumsTable.width/3}" text="Name" fx:id="nameColumn"/>
+                <TableColumn prefWidth="${albumsTable.width/3}" text="Creation date" fx:id="creationDateColumn"/>
+                <TableColumn prefWidth="${albumsTable.width/3}" text="Modification date" fx:id="modificationDateColumn"/>
             </columns>
         </TableView>
     </center>
@@ -22,38 +22,41 @@
     <right>
         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <opaqueInsets>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
             </opaqueInsets>
-            <children>
-                <Button fx:id="createAlbumButton" alignment="TOP_CENTER" mnemonicParsing="false"
-                        onAction="#handleCreateAlbumAction" text="Dodaj album">
-                    <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </VBox.margin></Button>
-                <Button fx:id="deleteAlbumButton" alignment="TOP_CENTER" mnemonicParsing="false"
-                        onAction="#handleDeleteAlbumAction" text="Usuń album">
-                    <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </VBox.margin></Button>
-                <Button fx:id="allPhotoViewButton" alignment="TOP_CENTER" mnemonicParsing="false"
-                        onAction="#handleAllPhotoViewAction" text="Pokaż wszystkie zdjęcia">
-                    <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </VBox.margin></Button>
-                <Button fx:id="changeEmailButton" alignment="TOP_CENTER" mnemonicParsing="false"
-                        onAction="#handleChangeEmail" text="Zmień email">
-                    <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </VBox.margin></Button>
-                <Button fx:id="logoutButton" alignment="TOP_CENTER" mnemonicParsing="false"
-                        onAction="#handleLogout" text="Wyloguj">
-                    <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                    </VBox.margin></Button>
-            </children>
             <BorderPane.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
             </BorderPane.margin>
+            <Button fx:id="createAlbumButton" alignment="TOP_CENTER" mnemonicParsing="false"
+                    onAction="#handleCreateAlbumAction" text="Create new album">
+                <VBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </VBox.margin>
+            </Button>
+            <Button fx:id="deleteAlbumButton" alignment="TOP_CENTER" mnemonicParsing="false"
+                    onAction="#handleDeleteAlbumAction" text="Remove album">
+                <VBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </VBox.margin>
+            </Button>
+            <Button fx:id="allPhotoViewButton" alignment="TOP_CENTER" mnemonicParsing="false"
+                    onAction="#handleAllPhotoViewAction" text="Show all photos">
+                <VBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </VBox.margin>
+            </Button>
+            <Button fx:id="changeEmailButton" alignment="TOP_CENTER" mnemonicParsing="false"
+                    onAction="#handleChangeEmail" text="Changes email">
+                <VBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </VBox.margin>
+            </Button>
+            <Button fx:id="logoutButton" alignment="TOP_CENTER" mnemonicParsing="false"
+                    onAction="#handleLogout" text="Log out">
+                <VBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </VBox.margin>
+            </Button>
         </VBox>
     </right>
 
