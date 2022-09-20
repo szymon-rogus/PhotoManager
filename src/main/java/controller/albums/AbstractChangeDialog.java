@@ -3,11 +3,15 @@ package controller.albums;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public abstract class AbstractChangeDialog {
 
     protected Stage dialogStage;
+
+    @FXML
+    protected TextField textField;
 
     @FXML
     protected Button okButton;
@@ -24,6 +28,5 @@ public abstract class AbstractChangeDialog {
         dialogStage.close();
     }
 
-    @FXML
     protected abstract void handleOkAction(ActionEvent event);
 }

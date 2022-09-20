@@ -44,6 +44,7 @@ public class LogInController extends AbstractValidationController {
     @Override
     protected void initialize() {
         super.initialize();
+        nameTextField.setPromptText("Enter name...");
 
         logInButton.disableProperty()
                 .bind(Bindings.or(nameTextField.textProperty().isEmpty(), passwordTextField.textProperty().isEmpty()));

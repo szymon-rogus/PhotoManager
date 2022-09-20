@@ -6,9 +6,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import javax.swing.text.html.Option;
 import java.util.List;
-import java.util.Optional;
 
 @Entity
 @Table(name = "USERS")

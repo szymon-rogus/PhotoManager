@@ -1,8 +1,6 @@
 package model;
 
 import app.AppManager;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Fetch;
@@ -31,9 +29,6 @@ public class Album {
     @NonNull
     private String name;
 
-    @Transient
-    private StringProperty nameProperty;
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Photo> photoList;
@@ -50,21 +45,11 @@ public class Album {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<User> users;
 
-    public Album(@NonNull String name, List<Photo> photoList) {
-        this.name = name;
-        this.nameProperty = new SimpleStringProperty(name);
-        this.photoList = photoList;
-    }
-
     public Album(@NonNull String name) {
         this.name = name;
-        this.nameProperty = new SimpleStringProperty(name);
         this.photoList = new ArrayList<>();
         this.users = new ArrayList<>();
-        final User user = AppManager.getSessionUser();
-        users.add(user);
-        user.addAlbum(this);
-
+        users.add(AppManager.getSessionUser());
     }
 
     public void addToAlbum(Photo photo) {

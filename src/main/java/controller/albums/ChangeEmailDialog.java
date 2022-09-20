@@ -5,7 +5,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import lombok.NoArgsConstructor;
 import model.User;
@@ -18,25 +17,23 @@ import util.Common;
 public class ChangeEmailDialog extends AbstractChangeDialog {
 
     @FXML
-    private TextField emailTextField;
-
-    @FXML
     private void initialize() {
-        emailTextField.setTextFormatter(new TextFormatter<>(Common.validationOperator));
+        textField.setTextFormatter(new TextFormatter<>(Common.validationOperator));
         okButton.disableProperty().bind(wrongMailFormat());
     }
 
     private ObservableBooleanValue wrongMailFormat() {
-        return Bindings.createBooleanBinding(() -> emailTextField.getText().isEmpty()
-                        || !emailTextField.getText().matches(".*@.*\\..*"), emailTextField.textProperty());
+        return Bindings.createBooleanBinding(() -> textField.getText().isEmpty()
+                        || !textField.getText().matches(".*@.*\\..*"), textField.textProperty());
     }
 
     @FXML
+    @Override
     protected void handleOkAction(ActionEvent event) {
         final User user = AppManager.getSessionUser();
         final Session session = AppManager.getSessionFactory().getCurrentSession();
         final Transaction tx = session.beginTransaction();
-        user.setEmail(emailTextField.getText());
+        user.setEmail(textField.getText());
         session.update(user);
         tx.commit();
         dialogStage.close();
