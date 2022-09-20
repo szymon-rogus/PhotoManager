@@ -3,6 +3,7 @@ package controller.albums;
 import app.AppManager;
 import controller.AppController;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +25,6 @@ import util.Common;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 
@@ -40,10 +40,10 @@ public class AlbumViewController {
     private TableColumn<Album, String> nameColumn;
 
     @FXML
-    private TableColumn<Album, Date> creationDateColumn;
+    private TableColumn<Album, String> creationDateColumn;
 
     @FXML
-    private TableColumn<Album, Date> modificationDateColumn;
+    private TableColumn<Album, String> modificationDateColumn;
 
     @FXML
     private MenuItem createAlbumButton;
@@ -86,8 +86,8 @@ public class AlbumViewController {
 
     private void setColumnsName() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        creationDateColumn.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
-        modificationDateColumn.setCellValueFactory(new PropertyValueFactory<>("modificationDate"));
+        creationDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(Common.globalFormat.format(cellData.getValue().getCreationDate())));
+        modificationDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(Common.globalFormat.format(cellData.getValue().getModificationDate())));
     }
 
     private void setIcons() {

@@ -3,6 +3,7 @@ package controller.validation;
 import app.AppManager;
 import controller.AppController;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -44,10 +45,11 @@ public class LogInController extends AbstractValidationController {
     @Override
     protected void initialize() {
         super.initialize();
-        nameTextField.setPromptText("Enter name...");
+        logInButton.disableProperty().bind(emptyEntries());
+    }
 
-        logInButton.disableProperty()
-                .bind(Bindings.or(nameTextField.textProperty().isEmpty(), passwordTextField.textProperty().isEmpty()));
+    private BooleanBinding emptyEntries() {
+        return Bindings.or(nameTextField.textProperty().isEmpty(), passwordTextField.textProperty().isEmpty());
     }
 
     @FXML

@@ -37,8 +37,6 @@ public class AppController {
 
     private static final String CHANGE_EMAIL_DIALOG_TITLE = "Change email";
 
-    private static final String SHARE_ALBUM_DIALOG_TITLE = "Share an album";
-
     private static final String SEND_EMAILS_VIEW_TITLE = "Sending emails...";
 
     private Stage primaryStage;
@@ -230,31 +228,6 @@ public class AppController {
 
         dialogStage.setResizable(false);
         dialogStage.showAndWait();
-    }
-
-    public void showShareAlbumDialog(Album album) throws IOException {
-        final FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(app.AppManager.class.getResource("/view/ShareAlbumDialog.fxml"));
-        final BorderPane page = loader.load();
-
-        final Stage dialogStage = new Stage();
-        dialogStage.setTitle(SHARE_ALBUM_DIALOG_TITLE);
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(primaryStage);
-        final Scene scene = new Scene(page);
-        dialogStage.setScene(scene);
-
-        final ShareAlbumDialogController controller = loader.getController();
-        controller.setDialogStage(dialogStage);
-        controller.setAlbum(album);
-
-        dialogStage.setResizable(false);
-        dialogStage.showAndWait();
-    }
-
-    public void backToPrimaryScene() {
-        primaryStage.setScene(primaryScene);
-        primaryStage.show();
     }
 
     public Stage showSendEmailsView() throws IOException {

@@ -41,9 +41,6 @@ public class PhotoViewController {
     private Button addPhotoButton;
 
     @FXML
-    private Button shareAlbumButton;
-
-    @FXML
     private Button backButton;
 
     @FXML
@@ -309,11 +306,6 @@ public class PhotoViewController {
         if (event.getClickCount() == 2 && photosTable.getSelectionModel().getSelectedItem() != null) {
             appController.showPhotoDialog(photosTable.getSelectionModel().getSelectedItem());
         }
-    }
-
-    @FXML
-    private void handleShareAlbum(ActionEvent event) throws IOException {
-        appController.showShareAlbumDialog(album);
     }
 
     public void reload() {

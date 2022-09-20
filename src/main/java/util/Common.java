@@ -5,6 +5,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.text.SimpleDateFormat;
 import java.util.function.UnaryOperator;
 
 public class Common {
@@ -15,6 +16,8 @@ public class Common {
         }
         return change;
     };
+
+    public static final SimpleDateFormat globalFormat = new SimpleDateFormat("yyyy-MM-dd, HH:mm:ss");
 
     public static void setIconForElement(MenuItem item, String path) {
         ImageView imageView = new ImageView(new Image(ClassLoader.getSystemResourceAsStream(path)));

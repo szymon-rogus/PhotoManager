@@ -28,6 +28,7 @@ public class ChangeAlbumNameDialog extends AbstractChangeAlbumDialog {
         Album album = query.uniqueResult();
 
         album.setName(textField.getText());
+
         session.update(album);
         AppManager.getSessionUser().renameAlbum(oldName, textField.getText());
         tx.commit();
